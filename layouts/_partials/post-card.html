@@ -31,7 +31,7 @@
                 {{ else }}
                     {{/* 图片资源 ($imageResource) 未找到，显示明确尺寸的占位符 */}}
                     <div style="width: 350px; height: 190px; background: #eee; display: flex; align-items: center; justify-content: center; text-align: center; margin: auto;">
-                        无预览图 (资源未找到)
+                        No preview image
                     </div>
                 {{ end }}
             </a>
@@ -44,7 +44,7 @@
             <a href="{{ $targetPermalink }}">
                 {{/* 原始占位符尺寸是 height:80px，这里改为 190px 高度以匹配裁剪尺寸 */}}
                 <div style="width: 100%; height: 190px; background: #eee; display: flex; align-items: center; justify-content: center; font-size: 0.8em; color: #777; text-align: center;">
-                    无预览图 (未定义图像)
+                    No preview image
                 </div>
             </a>
         </div>
