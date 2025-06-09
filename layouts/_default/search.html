@@ -1,0 +1,24 @@
+{{ define "main" }}
+<div class="sa-main-content search-page mb-4">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 col-md-12">
+                <article class="page-article py-4">
+                    <header class="page-header mb-4">
+                        {{/* 在 JS 中动态更新标题 */}}
+                        <h1 id="search-title" class="entry-title text-center">Search results</h1>
+                    </header>
+
+                    {{/* 搜索结果将由 JavaScript 插入到这里 */}}
+                    <div id="search-results" class="search-results-container">
+                        <p class="text-center text-muted">Please enter keywords for the search...</p>
+                    </div>
+
+                </article>
+            </div>
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+</div><!-- /.sa-main-content -->
+
+
+{{ end }}

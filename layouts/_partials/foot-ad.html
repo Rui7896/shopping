@@ -1,0 +1,9 @@
+{{ with .Site.Params.homepageFootAd }}
+    {{ if .enable }}
+<div class="sa-ad">
+    <div class="ad-content">
+        <a href="#"><img class="img-fluid" src="{{ "images/others/ad1.jpg" | relURL }}" alt="Image"></a>
+    </div>
+</div>
+{{ end }}
+{{ end }}

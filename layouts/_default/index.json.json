@@ -1,0 +1,46 @@
+{{- $.Scratch.Add "index" slice -}}
+{{- range .Site.RegularPages -}}
+    {{- $currentPage := . -}} {{/* 将当前页面对象赋给 $currentPage */}}
+    {{- if not $currentPage.Params.search_exclude }}
+        {{- if and $currentPage.Title $currentPage.Permalink $currentPage.Content }}
+            {{- $imageUrl := "" -}}
+            {{- $thumbnailUrl := "" -}}
+
+            {{- with $currentPage.Params.image -}} {{/* 检查 $currentPage 是否有 image 参数 */}}
+                {{- $imagePath := . -}} {{/* 此时的 . 是 $imagePath (字符串) */}}
+                {{- $imageResource := "" -}}
+                {{- $imageResource = resources.Get $imagePath -}}
+                {{- if not $imageResource -}}
+                    {{/* 使用 $currentPage.Resources 来访问原始页面对象的资源 */}}
+                    {{- with $currentPage.Resources.GetMatch $imagePath -}}
+                        {{- $imageResource = . -}}
+                    {{- end -}}
+                {{- end -}}
+
+                {{- if $imageResource -}}
+                    {{- $imageUrl = $imageResource.RelPermalink -}}
+                    {{- $thumb := $imageResource.Fill "350x190" -}}
+                    {{- $thumbnailUrl = $thumb.RelPermalink -}}
+                {{- else if strings.HasPrefix $imagePath "http" -}}
+                    {{- $imageUrl = $imagePath -}}
+                    {{- $thumbnailUrl = $imagePath -}}
+                {{- else -}}
+                    {{- $imageUrl = $imagePath | relURL -}}
+                    {{- $thumbnailUrl = $imagePath | relURL -}}
+                {{- end -}}
+            {{- end -}} {{/* 结束 with $currentPage.Params.image */}}
+
+            {{- $.Scratch.Add "index" (dict
+                "title" $currentPage.Title
+                "tags" $currentPage.Params.tags
+                "categories" $currentPage.Params.categories
+                "content" ($currentPage.Plain | htmlUnescape | plainify)
+                "permalink" $currentPage.Permalink
+                "date" ($currentPage.Date.Format "2006-01-02")
+                "image" $imageUrl
+                "thumbnail" $thumbnailUrl
+            ) -}}
+        {{- end -}} {{/* 结束 if and $currentPage.Title ... */}}
+    {{- end -}} {{/* 结束 if not $currentPage.Params.search_exclude */}}
+{{- end -}} {{/* 结束 range .Site.RegularPages */}}
+{{- $.Scratch.Get "index" | jsonify -}}

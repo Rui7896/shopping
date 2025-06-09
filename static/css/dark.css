@@ -1,0 +1,92 @@
+
+html, body {
+	color: #fff;
+	background-color: #0D0D0D;
+}
+
+a, 
+.widget-title, 
+.section-title h1, 
+.meta-widget .author-info h2 a {
+	color: #fff;
+}
+
+.sa-menu,
+.sa-post,
+.weather-bottom, 
+.meta-widget .tab-content, 
+.meta-widget .nav-tabs, 
+#footer, .breaking-news-1,
+.mega-menu-content, 
+.navbar-nav .sa-dropdown-menu li a, 
+.sa-language .select-options li, .select-options li, 
+.about-content, .service, .team-member, 
+.contact-form, .sa-comments-area, 
+.address-content .address, .account-content, 
+.account-content h1, .error-content, 
+.pagination>li>a, .pagination>li>span {
+	background-color: #292b2d;
+}
+
+.sa-language .select-options li,
+.select-options li {
+	color: #fff;
+}
+
+.footer-bottom {
+	border-top: 0;
+}
+
+.meta-widget .nav-tabs li>a,
+.meta-widget .nav-tabs li>a.active, 
+.meta-widget .nav-tabs li a:hover, 
+.meta-widget .nav-tabs li>a.active:focus, 
+.meta-widget .nav-tabs li>a.active:hover {
+	border-bottom: 0;
+}
+
+.dots-style-1 .slick-dots {
+	background-color: #111;
+}
+
+.section-title .see-all:after {
+	bottom: -6px;
+}
+
+.footer-widgets .widget h2,
+.mega-menu-content h3 {
+	color: #a5a7a8;
+}
+
+.sa-menu .navbar-nav li a {
+	color: #a5a7a8;
+}
+
+.sa-search .form-control,
+.form-control, 
+.account-content .buttons a {
+	color: #fff;
+	background-color: #0D0D0D;
+	border-color: #0D0D0D;
+}
+
+.form-control:focus {
+	background-color: transparent;
+}
+
+.tagcloud-style-1 a, 
+.btn.btn-primary:before {
+	background-color: #0D0D0D;
+}
+
+.account-content h1 {
+	border-bottom: 1px solid #0D0D0D;
+}
+
+.pagination>li {
+	border-right-color: #000;
+}
+
+.breaking-news-1 .sa-post .category a {
+	font-weight: 700;
+}
