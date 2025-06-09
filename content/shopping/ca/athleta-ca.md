@@ -1,5 +1,5 @@
 ---
-title: "Athleta Canada official page: 25% off, crazy shopping! The new summer dresses offer "all-day wear" and are a must-have for women's sports and leisure!"
+title: "Athleta Canada official page: 25% off, crazy shopping! The new summer dresses offer all-day wear and are a must-have for women's sports and leisure!"
 date: 2025-06-09
 image: "images/posts/ca/athleta-ca.jpg" # Path relative to static or assets
 image_link: ""
