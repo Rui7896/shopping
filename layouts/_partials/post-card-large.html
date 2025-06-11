@@ -1,0 +1,26 @@
+{{/* layouts/partials/post-card-large-summary.html用于大图带摘要的卡片 */}}
+<div class="entry-header">
+    {{ with .Params.image }}
+    <div class="entry-thumbnail">
+        <a href="{{ .Permalink }}"><img class="img-fluid" src="{{ . | relURL }}" alt="{{ .Title }}"></a>
+    </div>
+    {{ end }}
+    {{ with .Params.categories }}
+    <div class="category">
+        <ul class="global-list">
+            <li><a href="{{ "/categories/" | relURL }}{{ index . 0 | urlize }}">{{ index . 0 }}</a></li>
+        </ul>
+    </div>
+    {{ end }}
+</div>
+<div class="entry-content">
+    <h3 class="entry-title"><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+    <div class="entry-meta mb-2">
+        <ul class="global-list">
+            <li><i class="far fa-clock"></i><a href="#"> {{ .Date.Format ($.Site.Params.dateFormat | default "Jan 2, 2006") }}</a></li>
+            {{ with .Params.views }}<li><i class="far fa-eye"></i><a href="#">{{ . }}</a></li>{{ end }}
+            {{ with .Params.comments_count }}<li><i class="far fa-comment"></i><a href="#">{{ . }}</a></li>{{ end }}
+        </ul>
+    </div>
+    <p>{{ .Summary | truncate 120 }}</p>
+</div>

@@ -1,0 +1,59 @@
+{{ define "main" }}
+{{ partial "top-ad.html" . }}
+
+<div class="sa-main-content mb-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7 col-lg-8 sa-sticky">
+                <div class="theiaStickySidebar">
+                    <div class="sa-section">
+                        <div class="section-content">
+                            <div class="section-title">
+                                <h1>{{ .Title }}</h1> <!-- 显示当前列表的标题，如 "Posts", "科技" -->
+                            </div>
+
+    <!-- 文章循环开始 -->
+    {{ $pagesToDisplay := slice }} {{/* 初始化一个空 slice 来存放所有要显示的页面 */}}
+
+    {{/* 1. 添加当前 Section 下的直接常规页面 */}}
+    {{ $pagesToDisplay = $pagesToDisplay | append .RegularPages }}
+
+    {{/* 2. 遍历当前 Section 的所有子 Sections */}}
+    {{ range .Sections }} {{/* .Sections 是当前 Section 的直接子 Sections */}}
+        {{/* 对于每个子 Section，也获取它的 RegularPages */}}
+        {{ $pagesToDisplay = $pagesToDisplay | append .RegularPages }}
+        {{/* 如果子 Section 还有更深层的子 Section，你需要递归或更复杂的逻辑，但通常两层就够了 */}}
+        {{/* 为了简单起见，这里只考虑了一层子Section */}}
+        {{/* 如果需要无限深度，需要更复杂的递归 partial 或 Hugo 0.100+ 的 .CurrentSection.PagesRecursive */}}
+    {{ end }}
+
+    {{/* 对收集到的所有页面进行排序和分页 */}}
+    {{ $sortedPages := sort $pagesToDisplay "Date" "desc" }} {{/* 按日期降序排序 */}}
+    {{ $paginator := .Paginate $sortedPages }}
+
+    {{ if $paginator.Pages }}
+        {{ range $paginator.Pages }}
+            {{ partial "post-card.html" . }}
+        {{ end }}
+    {{ else }}
+        <p>There are no articles in this category for now.</p>
+    {{ end }}
+    <!-- 文章循环结束 -->
+
+                        </div>
+                    </div>
+
+                    {{ partial "pagination.html" .Paginator }} <!-- 传入分页器对象 -->
+
+                </div>
+            </div>
+            <div class="col-md-5 col-lg-4 sa-sticky">
+                <div class="sa-sidebar theiaStickySidebar">
+                    {{ partial "main-sidebar.html" . }} <!-- 侧边栏 -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{ end }}
+

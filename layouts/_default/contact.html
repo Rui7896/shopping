@@ -1,0 +1,107 @@
+{{ define "main" }}
+<div class="sa-main-content mb-4">
+    <div class="contact-section">
+        <div class="container">
+
+            {{/* --- 联系信息块 --- */}}
+            <div class="address-content">
+                <div class="row">
+                    {{/* 地址 */}}
+                    <div class="col-md-4">
+                        <div class="address">
+                            <div class="icon">
+                                <i class="fas fa-map-signs"></i> {{/* 确保 Font Awesome v5+ 已加载 */}}
+                            </div>
+                            <div class="text">
+                                <h3>Address</h3>
+                                <p>{{ .Params.address | default "(未提供)" }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {{/* 电话 */}}
+                    <div class="col-md-4">
+                        <div class="address">
+                            <div class="icon">
+                                <i class="fas fa-phone-alt"></i> {{/* 确保 Font Awesome v5+ 已加载 */}}
+                            </div>
+                            <div class="text">
+                                <h3>Contact number</h3>
+                                {{ with .Params.phone }}
+                                <a href="tel:{{ . }}">{{ . }}</a>
+                                {{ else }}
+                                <p>(Not provided)</p>
+                                {{ end }}
+                            </div>
+                        </div>
+                    </div>
+                    {{/* 邮箱 */}}
+                    <div class="col-md-4">
+                        <div class="address">
+                            <div class="icon">
+                                <i class="far fa-envelope"></i> {{/* 确保 Font Awesome v5+ 已加载 */}}
+                            </div>
+                            <div class="text">
+                                <h3>Email</h3>
+                                {{ with .Params.email }}
+                                <a href="mailto:{{ . }}">{{ . }}</a>
+                                {{ else }}
+                                <p>(Not provided)</p>
+                                {{ end }}
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.row -->
+            </div><!-- /.address-content -->
+
+            {{/* --- 可选的 Markdown 内容 --- */}}
+            {{ if .Content }}
+                <div class="contact-intro my-4 text-center"> {{/* 可以根据需要调整样式 */}}
+                    {{ .Content }}
+                </div>
+            {{ end }}
+
+            {{/* --- 联系表单 --- */}}
+            {{/*
+                重要提示: 这是一个静态网站，HTML 表单本身无法发送邮件。
+                你需要将 action 指向一个后端服务或第三方表单处理服务，例如：
+                - Formspree (https://formspree.io/)
+                - Netlify Forms (如果你托管在 Netlify)
+                - Getform, Basin, StaticForms, etc.
+                你需要根据所选服务的文档修改 action URL，并可能需要添加特定的隐藏字段。
+                下面的 action="YOUR_FORM_ENDPOINT" 只是一个占位符。
+                JavaScript 验证 (validate.js) 仍然可以在客户端工作。
+            */}}
+            <h2 class="text-center mt-5 mb-4">发送消息给我们</h2> {{/* 添加表单标题 */}}
+            <form id="contactform" class="contact-form" action="https://formspree.io/f/xeogzqjd" method="POST"> {{/* !!! 修改 action !!! */}}
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group mb-3"> {{/* Added mb-3 for spacing */}}
+                            <input type="text" class="form-control" name="name" required placeholder="您的姓名">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group mb-3"> {{/* Added mb-3 for spacing */}}
+                            <input type="email" class="form-control" name="email" required placeholder="您的邮箱">
+                        </div>
+                    </div>
+                </div><!-- /.row -->
+                <div class="form-group mb-3"> {{/* Added mb-3 for spacing */}}
+                    <input type="text" class="form-control" name="subject" required placeholder="主题">
+                </div>
+                <div class="form-group mb-3"> {{/* Added mb-3 for spacing */}}
+                    <textarea class="form-control" name="message" rows="6" required placeholder="您的留言"></textarea> {{/* Increased rows */}}
+                </div>
+                <div class="form-group text-center"> {{/* Centered button */}}
+                    <div class="flashinfo" style="display: none; margin-bottom: 15px; color: green;"></div> {{/* JS 反馈信息 */}}
+                    <button class="btn btn-primary btn-l" name="submit" type="submit">提交消息</button>
+                </div>
+                {{/* --- 根据你的表单服务添加必要的隐藏字段 --- */}}
+                {{/* 例如，对于 Formspree (免费计划可能需要注册) */}}
+                {{/* <input type="hidden" name="_replyto" value="email"> */}}
+                {{/* <input type="hidden" name="_subject" value="来自网站联系表单的新消息"> */}}
+            </form>
+
+        </div><!-- /.container -->
+    </div><!-- /.contact-section -->
+</div><!-- /.sa-main-content -->
+{{ end }}

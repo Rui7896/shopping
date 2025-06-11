@@ -1,0 +1,19 @@
+{{/* layouts/partials/post-card-small-horizontal.html用于小图在左/右，文字在另一侧的卡片 */}}
+<div class="sa-post small-post post-style-1"> {{/* 沿用原class */}}
+    {{ with .Params.image }}
+    <div class="entry-header">
+        <div class="entry-thumbnail">
+            <a href="{{ .Permalink }}"><img class="img-fluid" src="{{ . | relURL }}" alt="{{ .Title }}"></a>
+        </div>
+    </div>
+    {{ end }}
+    <div class="entry-content">
+        <h2 class="entry-title"><a href="{{ .Permalink }}">{{ .Title | truncate 50 }}</a></h2>
+        <div class="entry-meta">
+            <ul class="global-list">
+                <li><i class="far fa-clock"></i><a href="#"> {{ .Date.Format ($.Site.Params.dateFormat | default "Jan 2, 2006") }}</a></li>
+                {{ with .Params.views }}<li><i class="far fa-eye"></i><a href="#">{{ . }}</a></li>{{ end }}
+            </ul>
+        </div>
+    </div>
+</div>

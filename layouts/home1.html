@@ -1,0 +1,297 @@
+{{ define "main" }}
+{{ partial "top-ad.html" . }}
+
+<div class="sa-main-content mb-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7 col-lg-8 sa-sticky">
+                <div class="theiaStickySidebar">
+
+                    <!-- Section 1: "Worlds" - Latest News Slider (来自原始HTML) -->
+                    <div class="sa-section">
+                        <div class="section-content">
+                            <div class="section-title">
+                                <h1>世界 <small class="text-muted fs-6 ms-2">(动态轮播示例)</small></h1>
+                            </div>
+                            <div class="latest-news dots-style-1">
+                                <div class="latest-slider"> <!-- JS会初始化这个slider -->
+                                    {{ $latestPosts := first 4 (where .Site.RegularPages.ByDate.Reverse "Type" "posts") }}
+                                    {{ range $latestPosts }}
+                                    <div class="sa-post mid-post">
+                                        <div class="entry-header">
+                                            <div class="entry-thumbnail">
+                                                {{ with .Params.video_embed_url }}
+                                                    <!-- 使用视频嵌入 -->
+                                                    <iframe src="{{ . }}" sandbox="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                {{ else }}
+                                                    {{ with .Params.image }}
+                                                        <!-- 图像的链接 -->
+                                                        <a href="{{ . | relURL }}"><img class="img-fluid" src="{{ . | relURL }}" alt="{{ $.Title }} (Image Fallback)"></a>
+                                                    {{ else }}
+                                                        <!-- 无视频/图片时的占位 -->
+                                                        <div style="width:100%; height:180px; background:#eee; display:flex; align-items:center; justify-content:center;">无视频/图片</div>
+                                                    {{ end }}
+                                                {{ end }}
+                                            </div>
+                                        
+                                            {{ with .Params.categories }}
+                                            <div class="category">
+                                                <ul class="global-list">
+                                                    <li>
+                                                        <a href="{{ "/categories/" | relURL }}{{ index . 0 | urlize }}">{{ index . 0 }}</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            {{ end }}
+                                        </div>                                        <div class="entry-content">
+                                            <h2 class="entry-title"><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+                                            <div class="entry-meta">
+                                                <ul class="global-list">
+                                                    <li><i class="far fa-clock"></i><a href="#"> {{ .Date.Format "Jan 2, 2006" }} </a></li>
+                                                    {{ with .Params.views }}<li><i class="far fa-eye"></i><a href="#">{{ . }}</a></li>{{ end }}
+                                                    {{ with .Params.likes }}<li><i class="far fa-heart"></i><a href="#">{{ . }}</a></li>{{ end }}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{ end }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 2: Post Slider (left) & Small Posts (right) (来自原始HTML) -->
+                    <div class="sa-section section">
+                        <div class="section-content">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="post-slider"> <!-- JS会初始化这个slider -->
+                                        {{ $sliderPosts := first 2 (where (where .Site.RegularPages.ByDate.Reverse "Type" "posts") "Params.homepage_slider" true) }}
+                                        {{ if not $sliderPosts }}{{ $sliderPosts = first 2 (after 4 .Site.RegularPages.ByDate.Reverse) }}{{ end }} <!-- 降级：如果没标记的，取最新的几篇 -->
+                                        {{ range $sliderPosts }}
+                                        <div class="sa-post">
+                                            <div class="entry-header">
+                                                {{ with .Params.image }}
+                                                <div class="entry-thumbnail">
+                                                    <a href="{{ .Permalink }}"><img class="img-fluid" src="{{ . | relURL }}" alt="{{ .Title }}"></a>
+                                                </div>
+                                                {{ end }}
+                                                {{ with .Params.categories }}
+                                                <div class="category">
+                                                    <ul class="global-list">
+                                                        <li><a href="{{ "/categories/" | relURL }}{{ index . 0 | urlize }}">{{ index . 0 }}</a></li>
+                                                    </ul>
+                                                </div>
+                                                {{ end }}
+                                            </div>
+                                            <div class="entry-content">
+                                                <h3 class="entry-title"><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+                                                <div class="entry-meta mb-2">
+                                                    <ul class="global-list">
+                                                        <li><i class="far fa-clock"></i><a href="#"> {{ .Date.Format "Jan 2, 2006" }}</a></li>
+                                                        {{ with .Params.views }}<li><i class="far fa-eye"></i><a href="#">{{ . }}</a></li>{{ end }}
+                                                        {{ with .Params.comments_count }}<li><i class="far fa-comment"></i><a href="#">{{ . }}</a></li>{{ end }}
+                                                    </ul>
+                                                </div>
+                                                <p>{{ .Summary | truncate 100 }}</p>
+                                            </div>
+                                        </div>
+                                        {{ end }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    {{ $smallSidePosts := first 4 (where (where .Site.RegularPages.ByDate.Reverse "Type" "posts") "Params.homepage_small_list" true) }}
+                                    {{ if not $smallSidePosts }}{{ $smallSidePosts = first 4 (after 6 .Site.RegularPages.ByDate.Reverse) }}{{ end }}
+                                    {{ range $smallSidePosts }}
+                                    <div class="sa-post small-post post-style-1">
+                                        {{ with .Params.image }}
+                                        <div class="entry-header">
+                                            <div class="entry-thumbnail">
+                                                <a href="{{ .Permalink }}"><img class="img-fluid" src="{{ . | relURL }}" alt="{{ .Title }}"></a>
+                                            </div>
+                                        </div>
+                                        {{ end }}
+                                        <div class="entry-content">
+                                            <h2 class="entry-title"><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+                                            <div class="entry-meta">
+                                                <ul class="global-list">
+                                                    <li><i class="far fa-clock"></i><a href="#"> {{ .Date.Format "Jan 2, 2006" }}</a></li>
+                                                    {{ with .Params.views }}<li><i class="far fa-eye"></i><a href="#">{{ . }}</a></li>{{ end }}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{ end }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 3: Three Video Posts in a Row (来自原始HTML) -->
+                    <div class="sa-section section">
+                        <div class="section-content">
+                            <div class="row">
+                                {{ $videoPosts := first 3 (where (where .Site.RegularPages "Type" "posts") "Params.video_embed_url" "!=" nil) }}
+                                {{ if not $videoPosts }}{{ $videoPosts = first 3 (after 10 .Site.RegularPages.ByDate.Reverse) }}{{ end }}
+                                {{ range $videoPosts }}
+                                <div class="col-lg-4">
+                                    <div class="sa-post mid-post">
+                                        <div class="entry-header">
+                                            <div class="entry-thumbnail">
+                                                {{ with .Params.video_embed_url }}
+                                                    <!-- 如果有视频链接 -->
+                                                    <iframe src="{{ . }}" sandbox="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                {{ else }}
+                                                    {{ with .Params.image }}
+                                                        <!-- 否则，如果有图片链接 -->
+                                                        <a href="{{ .Permalink }}"><img class="img-fluid" src="{{ . | relURL }}" alt="{{ .Title }} (Image Fallback)"></a>
+                                                    {{ else }}
+                                                        <!-- 如果既没有视频也没有图片 -->
+                                                        <div style="width:100%; height:180px; background:#eee; display:flex; align-items:center; justify-content:center;">无视频/图片</div>
+                                                    {{ end }}
+                                                {{ end }}
+                                            </div>
+                                        
+                                            {{ with .Params.categories }}
+                                            <div class="category">
+                                                <ul class="global-list">
+                                                    <li>
+                                                        <a href="{{ "/categories/" | relURL }}{{ index . 0 | urlize }}">{{ index . 0 }}</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            {{ end }}
+                                        </div>                                        <div class="entry-content">
+                                            <h2 class="entry-title"><a href="{{ .Permalink }}">{{ .Title | truncate 50 }}</a></h2>
+                                            <div class="entry-meta">
+                                                <ul class="global-list">
+                                                    <li><i class="far fa-clock"></i><a href="#"> {{ .Date.Format "Jan 2, 2006" }}</a></li>
+                                                    {{ with .Params.views }}<li><i class="far fa-eye"></i><a href="#">{{ . }}</a></li>{{ end }}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{ end }}
+                            </div>
+                        </div>
+                    </div>
+
+
+                    {{ partial "foot-ad.html" . }}
+
+                    <!-- Section 5: Large Post (left) & Two Small Posts (right) (来自原始HTML) -->
+                    <div class="sa-section section">
+                        <div class="section-content">
+                            <div class="row">
+                                <div class="col-lg-9">
+                                    {{ $largePost := first 1 (where (where .Site.RegularPages.ByDate.Reverse "Type" "posts") "Params.homepage_large_feature" true) }}
+                                    {{ if not $largePost }}{{ $largePost = first 1 (after 13 .Site.RegularPages.ByDate.Reverse) }}{{ end }}
+                                    {{ range $largePost }}
+                                    <div class="sa-post">
+                                        <div class="entry-header">
+                                            {{ with .Params.image }}
+                                            <div class="entry-thumbnail">
+                                                <a href="{{ .Permalink }}"><img class="img-fluid" src="{{ . | relURL }}" alt="{{ .Title }}"></a>
+                                            </div>
+                                            {{ end }}
+                                        </div>
+                                        <div class="entry-content">
+                                            <h3 class="entry-title"><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+                                            <div class="entry-meta mb-2">
+                                                <ul class="global-list">
+                                                    <li><i class="far fa-clock"></i><a href="#"> {{ .Date.Format "Jan 2, 2006" }}</a></li>
+                                                    {{ with .Params.views }}<li><i class="far fa-eye"></i><a href="#">{{ . }}</a></li>{{ end }}
+                                                    {{ with .Params.comments_count }}<li><i class="far fa-comment"></i><a href="#">{{ . }}</a></li>{{ end }}
+                                                </ul>
+                                            </div>
+                                            <p>{{ .Summary | truncate 150 }}</p>
+                                        </div>
+                                    </div>
+                                    {{ end }}
+                                </div>
+                                <div class="col-lg-3">
+                                    {{ $twoSmallPosts := first 2 (where (where .Site.RegularPages.ByDate.Reverse "Type" "posts") "Params.homepage_aside_small" true) }}
+                                    {{ if not $twoSmallPosts }}{{ $twoSmallPosts = first 2 (after 14 .Site.RegularPages.ByDate.Reverse) }}{{ end }}
+                                    {{ range $twoSmallPosts }}
+                                    <div class="sa-post small-post">
+                                        {{ with .Params.image }}
+                                        <div class="entry-header">
+                                            <div class="entry-thumbnail">
+                                                <a href="{{ .Permalink }}"><img class="img-fluid" src="{{ . | relURL }}" alt="{{ .Title }}"></a>
+                                            </div>
+                                        </div>
+                                        {{ end }}
+                                        <div class="entry-content">
+                                            <h2 class="entry-title"><a href="{{ .Permalink }}">{{ .Title | truncate 40 }}</a></h2>
+                                            <div class="entry-meta">
+                                                <ul class="global-list">
+                                                    <li><i class="far fa-clock"></i><a href="#"> {{ .Date.Format "Jan 2, 2006" }}</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{ end }}
+                                </div>
+                            </div> <!-- /.row for large post & two small -->
+                            <!-- Section 6: Three "Video Icon" Posts in a Row (来自原始HTML) -->
+                            <div class="row mt-4"> <!-- Added mt-4 for spacing -->
+                                {{ $videoIconPosts := first 3 (where (where .Site.RegularPages "Params.image" "!=" nil) ".Params.video_popup_url" "!=" nil ) }}
+                                {{ if not $videoIconPosts }}{{ $videoIconPosts = first 3 (after 16 .Site.RegularPages.ByDate.Reverse) }}{{ end }}
+                                {{ range $videoIconPosts }}
+                                <div class="col-lg-4">
+                                    <div class="sa-post mid-post">
+                                        <div class="entry-header">
+                                            <div class="entry-thumbnail">
+                                                {{ with .Params.video_popup_url }}
+                                                <div class="video-icon">
+                                                    <a class="sa-popup" href="{{ . }}"><i class="fa fa-play" aria-hidden="true"></i></a>
+                                                </div>
+                                                {{ end }}
+                                                <a href="{{ .Permalink }}"><img class="img-fluid" src="{{ .Params.image | relURL }}" alt="{{ .Title }}"></a>
+                                            </div>
+                                        </div>
+                                        <div class="entry-content">
+                                            <h2 class="entry-title"><a href="{{ .Permalink }}">{{ .Title | truncate 50 }}</a></h2>
+                                            <div class="entry-meta">
+                                                <ul class="global-list">
+                                                    <li><i class="far fa-clock"></i><a href="#"> {{ .Date.Format "Jan 2, 2006" }}</a></li>
+                                                    {{ with .Params.views }}<li><i class="far fa-eye"></i><a href="#">{{ . }}</a></li>{{ end }}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{ end }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 7: Medium Post Style List (来自原始HTML) -->
+                    <div class="sa-section">
+                        <div class="section-content mt-3">
+                            {{ $mediumListPosts := first 4 (after 19 .Site.RegularPages.ByDate.Reverse) }} <!-- Adjust 'after' based on posts already shown -->
+                            {{ range $mediumListPosts }}
+                                {{ partial "post-card.html" . }} <!-- Reusing the post-card partial -->
+                            {{ end }}
+                        </div>
+                    </div>
+
+                    <!-- Pagination (通常首页不直接放完整分页，但如果需要可以保留) -->
+                    <!-- {{ $paginator := .Paginate (where .Site.RegularPages "Type" "posts") }} -->
+                    <!-- {{ partial "pagination.html" $paginator }} -->
+                    <div class="sg-pagination text-center mb-3">
+                        <a href="{{ "/posts/" | relURL }}" class="btn btn-primary">查看所有文章 <i class="fas fa-arrow-right"></i></a>
+                    </div>
+
+                </div><!-- /.theiaStickySidebar -->
+            </div>
+            <div class="col-md-5 col-lg-4 sa-sticky">
+                <div class="sa-sidebar theiaStickySidebar">
+                    {{ partial "main-sidebar.html" . }}
+                </div>
+            </div>
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+</div><!-- /.sa-main-content -->
+{{ end }}
