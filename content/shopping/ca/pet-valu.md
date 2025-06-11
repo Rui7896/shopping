@@ -9,7 +9,7 @@ tags: ['Pet food', 'Pet supplies', 'Pet grooming services', 'Pet boarding servic
 views: "2889k"
 likes: "5444"
 comments_count: "7448" # This would usually be dynamic from comment system
-summary: "When trying to view the content of the webpage `https://www.petvalu.ca`, a parsing failure occurred. However, from the domain name "petvalu.ca", it can be inferred that this website is most likely the official website of a Canadian pet company. It may have content such as the sale of pet products, provision of service information, sharing of knowledge resources, etc. You can also check store and logistics information. You can try to directly open the webpage or search for details."
+summary: "When trying to view the content of the webpage `https://www.petvalu.ca`, a parsing failure occurred. However, from the domain name petvalu.ca, it can be inferred that this website is most likely the official website of a Canadian pet company. It may have content such as the sale of pet products, provision of service information, sharing of knowledge resources, etc. You can also check store and logistics information. You can try to directly open the webpage or search for details."
 breaking_news: true   
 homepage_slider_v2: false  
 homepage_latest_news: true  

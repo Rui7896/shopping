@@ -4,7 +4,7 @@ date: 2025-06-09
 image: "images/posts/ca/walmart-ca.jpg" # Path relative to static or assets
 image_link: ""
 author: "shopping.nav8.top" # Or from site params
-categories: ['<|Rewrite Category|>: Human verification']
+categories: ['Human verification']
 tags: ['Online store service']
 views: "1541k"
 likes: "1140"

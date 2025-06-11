@@ -51,13 +51,12 @@ jobs:
           && sudo dpkg -i ${{ runner.temp }}/hugo.deb
       - name: 使用 Hugo 构建
         env:
-          # 为了最大程度地兼容 Hugo 模块
           HUGO_ENVIRONMENT: production
           HUGO_ENV: production
         run: |
           hugo \
             --gc --minify \
-            --baseURL "${{ steps.pages.outputs.base_url }}/"
+            --baseURL "https://shopping.nav8.top/"
       - name: 上传工件
         uses: actions/upload-pages-artifact@v3
         with:

@@ -9,7 +9,7 @@ tags: ['Online store service', 'Clothing', 'Footwear', 'Accessories', 'Fashion i
 views: "2889k"
 likes: "5444"
 comments_count: "7448" # This would usually be dynamic from comment system
-summary: "The official website of Harry Rosen is a one-stop platform for high-end men's fashion, with a clear positioning and mainly offering clothing and other items from designer brands. It features a wide range of promotional activities, such as Father's Day specials. The "Fresh Off the Press" section provides dressing guides. There are also a membership program and clearance channels. The website has a simple and elegant style, capable of meeting the needs of men for high - quality dressing, and is definitely worth a visit for stylish gentlemen. "
+summary: "The official website of Harry Rosen is a one-stop platform for high-end men's fashion, with a clear positioning and mainly offering clothing and other items from designer brands. It features a wide range of promotional activities, such as Father's Day specials. The Fresh Off the Press section provides dressing guides. There are also a membership program and clearance channels. The website has a simple and elegant style, capable of meeting the needs of men for high - quality dressing, and is definitely worth a visit for stylish gentlemen. "
 breaking_news: true   
 homepage_slider_v2: false  
 homepage_latest_news: true  

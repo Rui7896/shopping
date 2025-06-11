@@ -9,7 +9,7 @@ tags: ['Online store service', 'Sports apparel', 'Yoga clothing', 'Sportswear', 
 views: "2889k"
 likes: "5444"
 comments_count: "7448" # This would usually be dynamic from comment system
-summary: "The official page of Athleta Canada (https://athleta.gapcanada.ca) focuses on women's sportswear and belongs to the Gap Group. There is a 25% discount on the entire store, and new products such as summer dresses have been launched. The page is concise and suitable for mobile browsing. The target users are health - conscious women, and the products are suitable for various scenarios. It accurately captures the market through promotions and designs. Go and check it out by clicking "Shop Now"."
+summary: "The official page of Athleta Canada (https://athleta.gapcanada.ca) focuses on women's sportswear and belongs to the Gap Group. There is a 25% discount on the entire store, and new products such as summer dresses have been launched. The page is concise and suitable for mobile browsing. The target users are health - conscious women, and the products are suitable for various scenarios. It accurately captures the market through promotions and designs. Go and check it out by clicking Shop Now."
 breaking_news: true   
 homepage_slider_v2: false  
 homepage_latest_news: true  

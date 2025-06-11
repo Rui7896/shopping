@@ -9,9 +9,7 @@ tags: ['Online store service', 'Handbags', 'Jewelry', 'Sunglasses', 'Accessories
 views: "4273k"
 likes: "3374"
 comments_count: "736" # This would usually be dynamic from comment system
-summary: "In the summer of 2025, the MyBag shopping website launched a summer promotion with a maximum discount of 30%. The page showcases many well - known brands and offers a rich variety of products with discounts ranging from 30% to 70%. The website has good user interaction and marketing strategies, but there are problems such as page garbled characters and messy information. Overall, it is suitable for people who pursue a轻奢 lifestyle and value cost - effectiveness. Optimizing the page would make it even more perfect.
-
-Note: "轻奢" doesn't have a direct one - to - one English equivalent. Here, I left it as "轻奢" since it's a concept that might be understood in a global context related to a certain level of high - end and affordable luxury. If you want a more descriptive way, it could be something like "affordable luxury" or "moderate - end luxury" adjusted according to the exact intended meaning. "
+summary: "In the summer of 2025, the MyBag shopping website launched a summer promotion with a maximum discount of 30%. The page showcases many well - known brands and offers a rich variety of products with discounts ranging from 30% to 70%. The website has good user interaction and marketing strategies, but there are problems such as page garbled characters and messy information. Overall, it is suitable for people who pursue a轻奢 lifestyle and value cost - effectiveness. Optimizing the page would make it even more perfect."
 breaking_news: true   
 homepage_slider_v2: false  
 homepage_latest_news: true  

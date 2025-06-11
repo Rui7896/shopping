@@ -1,5 +1,5 @@
 ---
-title: "Coast Appliances Official Website: A "Grand View Garden" of High-End Appliances in Canada, Offering One-Stop Shopping for a Quality Life!"
+title: "Coast Appliances Official Website: A Grand View Garden of High-End Appliances in Canada, Offering One-Stop Shopping for a Quality Life!"
 date: 2025-06-09
 image: "images/posts/ca/coast-appliances.jpg" # Path relative to static or assets
 image_link: ""

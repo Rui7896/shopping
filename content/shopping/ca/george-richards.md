@@ -4,7 +4,7 @@ date: 2025-06-09
 image: "images/posts/ca/george-richards.jpg" # Path relative to static or assets
 image_link: ""
 author: "shopping.nav8.top" # Or from site params
-categories: ['<|Rewrite Category|>: Legal website']
+categories: ['Legal website']
 tags: ['Legal industry services']
 views: "2889k"
 likes: "5444"
