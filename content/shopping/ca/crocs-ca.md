@@ -4,7 +4,7 @@ date: 2025-06-09
 image: "images/posts/ca/crocs-ca.jpg" # Path relative to static or assets
 image_link: ""
 author: "shopping.nav8.top" # Or from site params
-categories: ['<|Rewrite Category|>: Webpage interpretation']
+categories: ['Webpage interpretation']
 tags: ['Online store service']
 views: "2889k"
 likes: "5444"

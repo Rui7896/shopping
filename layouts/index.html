@@ -1,382 +1,599 @@
 {{ define "main" }}
+{{ partial "top-ad.html" . }}
 
-    <!-- 突发新闻栏 (Breaking News Bar) -->
-    <div class="sa-breaking-news">
-        <div class="container">
-            <div class="breaking-content d-flex">
-                <div class="title">
-                    <span>突发新闻</span>
-                </div>
-                <ul class="news-ticker"> <!-- JS会初始化这个ticker -->
-                    {{ $breakingNews := first 3 (where (where .Site.RegularPages.ByDate.Reverse "Type" "posts") "Params.breaking_news" true) }}
-                    {{ if not $breakingNews }}{{ $breakingNews = first 3 .Site.RegularPages.ByDate.Reverse }}{{ end }} <!-- Fallback -->
-                    {{ range $breakingNews }}
-                    <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
-                    {{ end }}
-                </ul>
-            </div>
-        </div>
-    </div>
+<div class="sa-main-content mb-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7 col-lg-8 sa-sticky">
+                <div class="theiaStickySidebar">
 
-    <!-- 首页轮播和右侧广告 (Home Slider & Featured Ad) -->
-    <div class="sa-home-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-9">
-                    <div id="home-slider" class="sa-home-slider carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                            {{ $featuredSlides := where (where .Site.RegularPages.ByDate.Reverse "Type" "posts") "Params.homepage_slider_v2" true | first 4 }}
-                            {{ if not $featuredSlides }}{{ $featuredSlides = first 4 (after 3 .Site.RegularPages.ByDate.Reverse) }}{{ end }} <!-- Fallback, skip breaking news posts -->
-                            {{ range $i, $slide := $featuredSlides }}
-                            <div class="carousel-item {{ if eq $i 0 }}active{{ end }}">
-                                <div class="sa-post featured-post">
-                                    <div class="entry-header">
-                                        {{ with .Params.image }}
-                                        <div class="entry-thumbnail">
-                                            <a href="{{ $.Permalink }}"><img class="img-fluid" src="{{ . | relURL }}" alt="{{ $.Title }}"></a>
-                                        </div>
-                                        {{ end }}
-                                    </div>
-                                    <div class="entry-content absolute">
-                                        {{ with .Params.categories }}
-                                        <div class="category">
-                                            <ul class="global-list">
-                                                <li><a href="{{ "/categories/" | relURL }}{{ index . 0 | urlize }}">{{ index . 0 }}</a></li>
-                                            </ul>
-                                        </div>
-                                        {{ end }}
-                                        <h2 class="entry-title">
-                                            <a href="{{ .Permalink }}">{{ .Title }}</a>
-                                        </h2>
-                                        <div class="entry-meta">
-                                            <ul class="global-list">
-                                                <li><i class="far fa-clock"></i><a href="#"> {{ .Date.Format ($.Site.Params.dateFormat | default "Jan 2, 2006") }}</a></li>
-                                                {{ with .Params.views }}<li><i class="far fa-eye"></i><a href="#">{{ . }}</a></li>{{ end }}
-                                                {{ with .Params.likes }}<li><i class="far fa-heart"></i><a href="#">{{ . }}</a></li>{{ end }}
-                                                {{ with .Params.comments_count }}<li><i class="far fa-comment"></i><a href="#">{{ . }}</a></li>{{ end }}
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            {{ end }}
-                        </div>
-                        <ol class="carousel-indicators">
-                            {{ range $i, $slide := $featuredSlides }}
-                            <li data-bs-target="#home-slider" data-bs-slide-to="{{ $i }}" class="{{ if eq $i 0 }}active{{ end }}">
-                                <div class="text">
-                                    {{ with .Params.categories }}<span class="catagory">{{ index . 0 }}</span>{{ end }}
-                                    <span class="indicators-title">{{ .Title | truncate 35 }}</span>
-                                </div>
-                            </li>
-                            {{ end }}
-                        </ol>
-                    </div>
-                </div>
-                <div class="col-md-3 d-none d-lg-block">
-                    {{ with .Site.Params.homeSliderAd }}
-                        {{ if .enable }}
-                        <div class="featured-add">
-                            <a href="{{ .linkUrl | safeURL }}" target="_blank" rel="noopener noreferrer">
-                                <img src="{{ .imageUrl | relURL }}" alt="{{ .altText | default "Advertisement" }}" class="img-fluid">
-                            </a>
-                        </div>
-                        {{ end }}
-                    {{ end }}
-                </div>
-            </div>
+<!-- Section 1: "Worlds" - Latest News Slider (Matching Original HTML Structure) -->
+<div class="sa-section">
+    <div class="section-content">
+        <div class="section-title">
+            <h3>Recommended merchants</h3> {{/* Static title from original HTML */}}
         </div>
-    </div>
+        <div class="latest-news dots-style-1">
+            <div class="latest-slider"> {{/* JS needs to target this class */}}
+                {{/* --- Hugo Dynamic Content Start --- */}}
+                {{/* Query for the posts to display in this slider */}}
+                {{ $section1Posts := first 4 (where .Site.RegularPages.ByDate.Reverse "Type" "posts") }} {{/* Example: Get latest 4 posts */}}
+                {{ range $section1Posts }}
+                {{ $page := . }} {{/* Assign current page object to $page variable */}}
 
-    <!-- 中间广告位 (重复利用 top-ad.html 的逻辑，或者直接从 config 读取) -->
-    {{ with .Site.Params.homepageMiddleAdV2 }}
-        {{ if .enable }}
-        <div class="sa-ad">
-            <div class="container">
-                <div class="ad-content">
-                    <a href="{{ .linkUrl | safeURL }}" target="_blank" rel="noopener noreferrer">
-                        <img class="img-fluid" src="{{ .imageUrl | relURL }}" alt="{{ .altText | default "Advertisement" }}">
-                    </a>
-                </div>
-            </div>
-        </div>
+                {{/* Replicate the exact structure for each slider item */}}
+                <div class="sa-post mid-post">
+                    <div class="entry-header">
+{{ with $page.Params.image }}
+    {{ $imagePath := . }} {{/* 获取 Front Matter 中的图片路径 */}}
+    {{ $imageResource := "" }}
+
+    {{/* 尝试将路径作为全局资源 (assets 目录) 获取 */}}
+    {{ $imageResource = resources.Get $imagePath }}
+
+    {{/* 如果在 assets 中找不到，并且当前页面是 Page Bundle，则尝试作为页面资源获取 */}}
+    {{ if not $imageResource }}
+        {{ with $page.Resources.GetMatch $imagePath }}
+            {{ $imageResource = . }}
         {{ end }}
     {{ end }}
 
-    <!-- 主内容区 (Latest News, Worlds, Technology, etc.) -->
-    <div class="sa-main-content mb-4">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-7 col-lg-8 sa-sticky">
-                    <div class="theiaStickySidebar">
-
-                        <!-- 最新新闻轮播 (Latest News Slider) -->
-                        <div class="sa-section">
-                            <div class="section-content">
-                                <div class="section-title">
-                                    <h1>最新新闻</h1>
-                                </div>
-                                <div class="latest-news dots-style-1">
-                                    <div class="latest-slider"> <!-- JS会初始化这个slider -->
-                                        {{ $latestNews := first 4 (where (where .Site.RegularPages.ByDate.Reverse "Type" "posts") "Params.homepage_latest_news" true ) }}
-                                        {{ if not $latestNews }}{{ $latestNews = first 4 (after (add (len $featuredSlides) (len $breakingNews)) .Site.RegularPages.ByDate.Reverse) }}{{ end }}
-                                        {{ range $latestNews }}
-                                        <div class="sa-post mid-post">
-                                            <div class="entry-header">
-                                                {{ with .Params.image }}
-                                                <div class="entry-thumbnail">
-                                                    <a href="{{ $.Permalink }}"><img class="img-fluid" src="{{ . | relURL }}" alt="{{ $.Title }}"></a>
-                                                </div>
-                                                {{ end }}
-                                                {{ with .Params.categories }}
-                                                <div class="category">
-                                                    <ul class="global-list">
-                                                        <li><a href="{{ "/categories/" | relURL }}{{ index . 0 | urlize }}">{{ index . 0 }}</a></li>
-                                                    </ul>
-                                                </div>
-                                                {{ end }}
-                                            </div>
-                                            <div class="entry-content">
-                                                <h2 class="entry-title"><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
-                                                <div class="entry-meta">
-                                                    <ul class="global-list">
-                                                        <li><i class="far fa-clock"></i><a href="#"> {{ .Date.Format ($.Site.Params.dateFormat | default "Jan 2, 2006") }}</a></li>
-                                                        {{ with .Params.views }}<li><i class="far fa-eye"></i><a href="#">{{ . }}</a></li>{{ end }}
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {{ end }}
-                                    </div>
-                                </div>
+    <div class="entry-thumbnail">
+        <a href="{{ $page.Permalink }}">
+            {{ if $imageResource }}
+                {{/* 裁剪图片: Fill 方法会裁剪以填充指定尺寸，保持比例并裁剪多余部分 */}}
+                {{/* 其他方法有: Resize, Fit */}}
+                {{ $croppedImage := $imageResource.Fill "460x350" }}
+                <img class="img-fluid" src="{{ $croppedImage.RelPermalink }}" width="{{ $croppedImage.Width }}" height="{{ $croppedImage.Height }}" alt="{{ $page.Title }}">
+            {{ else }}
+                {{/* 如果图片资源无法找到，显示占位符 */}}
+                <div style="width:460px; height:350px; background:#eee; display:flex; align-items:center; justify-content:center; text-align:center; margin: auto;">No preview image</div>
+            {{ end }}
+        </a>
+    </div>
+{{ else }}
+    {{/* 如果 Front Matter 中没有定义 image 参数，显示占位符 */}}
+    <div class="entry-thumbnail">
+        <a href="{{ $page.Permalink }}">
+            <div style="width:100%; height:180px; background:#eee; display:flex; align-items:center; justify-content:center; text-align:center;">No preview image</div>
+        </a>
+    </div>
+{{ end }}
+                        {{ with $page.Params.categories }}
+                            <div class="category">
+                                <ul class="global-list">
+                                    {{/* Display the first category */}}
+                                    <li><a href="{{ "/categories/" | relURL }}{{ index . 0 | urlize }}">{{ index . 0 }}</a></li>
+                                </ul>
                             </div>
-                        </div>
-
-                        <!-- 世界新闻版块 (Worlds Section) -->
-                        {{ $worldSection := .Site.GetPage "section" "world" }} <!-- 假设你有一个 "world" section -->
-                        {{ if not $worldSection }}{{ $worldSection = .Site.GetPage "taxonomy" "categories" "world" }} {{end}} <!-- 或者按分类 -->
-                        {{ if $worldSection }}
-                        <div class="sa-section section">
-                            <div class="section-content">
-                                <div class="section-title">
-                                    <h1>{{ $worldSection.Title | default "世界新闻" }}</h1>
-                                    <div class="see-all">
-                                        <a href="{{ $worldSection.Permalink }}">查看全部</a>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="post-slider"> <!-- JS会初始化 -->
-                                            {{ $worldSliderPosts := first 2 (where $worldSection.Pages.ByDate.Reverse "Params.image" "!=" nil) }}
-                                            {{ range $worldSliderPosts }}
-                                            <div class="sa-post">
-                                                {{ partial "partials/post-card-large-summary.html" . }} <!-- 需要创建一个新的或修改的 partial -->
-                                            </div>
-                                            {{ end }}
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        {{ $worldSmallPosts := after 2 $worldSection.Pages.ByDate.Reverse | first 4 }}
-                                        {{ range $worldSmallPosts }}
-                                            {{ partial "partials/post-card-small-horizontal.html" . }} <!-- 需要创建一个新的或修改的 partial -->
-                                        {{ end }}
-                                    </div>
-                                </div>
-                                <div class="row mt-3"> <!-- 视频帖子行 -->
-                                     {{ $worldVideoPosts := where $worldSection.Pages "Params.video_embed_url" "!=" nil | first 3 }}
-                                     {{ range $worldVideoPosts }}
-                                     <div class="col-lg-4">
-                                         {{ partial "partials/post-card-video.html" . }} <!-- 需要一个视频卡片 partial -->
-                                     </div>
-                                     {{ end }}
-                                </div>
-                            </div>
-                        </div>
                         {{ end }}
+                    </div>
+                    <div class="entry-content">
+                        <h3 class="entry-title">
+                            {{/* Link title to the post's permalink */}}
+                            <a href="{{ $page.Permalink }}">{{ $page.Title }}</a>
+                        </h3>
+                        <div class="entry-meta">
+                            <ul class="global-list">
+                                <li><i class="far fa-clock"></i><a href="#"> {{ $page.Date.Format ($.Site.Params.dateFormat | default "Jan 2, 2006") }} </a></li>
+                                {{ with $page.Params.views }}
+                                    <li><i class="far fa-eye"></i><a href="#">{{ . }}</a></li>
+                                {{ end }}
+                                {{ with $page.Params.likes }}
+                                    <li><i class="far fa-heart"></i><a href="#">{{ . }}</a></li>
+                                {{ end }}
+                            </ul>
+                        </div>
+                    </div>
+                </div><!-- /.sa-post mid-post -->
+                {{/* --- End loop for one item --- */}}
 
-                        <!-- 中间广告位 -->
-                        {{ with .Site.Params.homepageContentAd1 }}
-                            {{ if .enable }}
-                            <div class="sa-ad">
-                                <div class="ad-content">
-                                    <a href="{{ .linkUrl | safeURL }}" target="_blank" rel="noopener noreferrer"><img class="img-fluid" src="{{ .imageUrl | relURL }}" alt="{{ .altText }}"></a>
-                                </div>
+                {{ end }} {{/* End range $section1Posts */}}
+                {{/* --- Hugo Dynamic Content End --- */}}
+
+            </div><!-- /.latest-slider -->
+        </div><!-- /.latest-news -->
+    </div><!-- /.section-content -->
+</div><!-- /.sa-section -->
+<!-- Section 2: Post Slider (left) & Small Posts (right) (修正链接) -->
+<div class="sa-section section">
+    <div class="section-content">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="post-slider"> <!-- JS会初始化这个slider -->
+                    {{ $sliderPosts := first 2 (where (where .Site.RegularPages.ByDate.Reverse "Type" "posts") "Params.homepage_slider" true) }}
+                    {{ if not $sliderPosts }}{{ $sliderPosts = first 2 (after 4 .Site.RegularPages.ByDate.Reverse) }}{{ end }}
+                    {{ range $sliderPosts }}
+                    {{ $page := . }} {{/* 将当前页面对象赋给 $page */}}
+                    <div class="sa-post">
+                        <div class="entry-header">
+{{ with $page.Params.image }}
+    {{ $imagePath := . }} {{/* Front Matter中的图片路径 */}}
+    {{ $imageResource := "" }}
+
+    {{/* 1. 尝试从 /assets 目录获取全局资源 */}}
+    {{ $imageResource = resources.Get $imagePath }}
+
+    {{/* 2. 如果在assets中找不到，并且是Page Bundle，则尝试从页面资源获取 */}}
+    {{ if not $imageResource }}
+        {{ with $page.Resources.GetMatch $imagePath }}
+            {{ $imageResource = . }}
+        {{ end }}
+    {{ end }}
+
+    <div class="entry-thumbnail">
+        <a href="{{ $page.Permalink }}">
+            {{ if $imageResource }}
+                {{/* 裁剪图片为 650x380 */}}
+                {{/* 使用 Fill 方法，它会裁剪以填充指定尺寸，保持比例并裁剪多余部分 */}}
+                {{/* 你可以指定锚点，如 "Center" (默认), "TopLeft", "Smart" 等 */}}
+                {{ $croppedImage := $imageResource.Fill "650x380" }}
+                <img class="img-fluid"
+                     src="{{ $croppedImage.RelPermalink }}"
+                     width="{{ $croppedImage.Width }}"
+                     height="{{ $croppedImage.Height }}"
+                     alt="{{ $page.Title }}">
+            {{ else }}
+                {{/* 图片资源无法找到或无效，显示明确尺寸的占位符 */}}
+                <div style="width: 650px; height: 380px; background: #eee; display: flex; align-items: center; justify-content: center; text-align: center; margin: auto;">
+                    No preview image
+                </div>
+            {{ end }}
+        </a>
+    </div>
+{{ else }}
+    {{/* Front Matter中没有定义 image 参数，显示占位符 */}}
+    <div class="entry-thumbnail">
+        <a href="{{ $page.Permalink }}">
+            {{/* 原始占位符尺寸是 height:200px，这里可以考虑是否也改成 380px 高度 */}}
+            <div style="width: 100%; height: 380px; background: #eee; display: flex; align-items: center; justify-content: center; text-align: center;">
+                No preview image
+            </div>
+        </a>
+    </div>
+{{ end }}
+                            {{ with $page.Params.categories }}
+                            <div class="category">
+                                <ul class="global-list">
+                                    <li><a href="{{ "/categories/" | relURL }}{{ index . 0 | urlize }}">{{ index . 0 }}</a></li>
+                                </ul>
                             </div>
                             {{ end }}
-                        {{ end }}
-
-
-                        <!-- 技术新闻版块 (Technology Section) - 结构类似 Worlds -->
-                        {{/* ... 此处添加技术新闻版块的逻辑，仿照 Worlds Section ... */}}
-                        {{ $techSection := .Site.GetPage "section" "technology" }}
-                        {{ if not $techSection }}{{ $techSection = .Site.GetPage "taxonomy" "categories" "technology" }} {{end}}
-                        {{ if $techSection }}
-                        <div class="sa-section section">
-                            <div class="section-content">
-                                <div class="section-title">
-                                    <h1>{{ $techSection.Title | default "科技新闻" }}</h1>
-                                    <div class="see-all">
-                                        <a href="{{ $techSection.Permalink }}">查看全部</a>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-9">
-                                        {{ with first 1 $techSection.Pages.ByDate.Reverse }}
-                                        <div class="sa-post"> <!-- 大图文章 -->
-                                             {{ partial "partials/post-card-large-summary.html" . }}
-                                        </div>
-                                        {{ end }}
-                                    </div>
-                                    <div class="col-lg-3">
-                                        {{ range first 2 (after 1 $techSection.Pages.ByDate.Reverse) }}
-                                            {{ partial "partials/post-card-small-vertical.html" . }} <!-- 垂直小卡片 -->
-                                        {{ end }}
-                                    </div>
-                                </div>
-                                <div class="row mt-3">
-                                    {{ range first 3 (where (after 3 $techSection.Pages.ByDate.Reverse) "Params.video_popup_url" "!=" nil) }}
-                                    <div class="col-lg-4">
-                                        {{ partial "partials/post-card-image-popup.html" . }} <!-- 带播放图标的卡片 -->
-                                    </div>
-                                    {{ end }}
-                                </div>
-                            </div>
                         </div>
-                        {{ end }}
-
-
-                        <!-- 图片画廊 (Photo Gallery) -->
-                        <div class="sa-section section">
-                            <div class="section-content mt-3">
-                                <div class="section-title">
-                                    <h1>图片画廊</h1>
-                                </div>
-                                <div class="photo-gallery">
-                                    <div class="gallery-slider dots-style-1"> <!-- JS会初始化 -->
-                                        {{ $galleryImages := where .Site.RegularPages "Params.gallery_image" true | first 6 }}
-                                        {{ range $galleryImages }}
-                                        <div class="sa-post">
-                                            <div class="entry-header">
-                                                <div class="entry-thumbnail">
-                                                    {{ with .Params.video_popup_url }}
-                                                    <div class="video-icon">
-                                                        <a class="sa-popup" href="{{ . }}"><i class="fa fa-play" aria-hidden="true"></i></a>
-                                                    </div>
-                                                    {{ end }}
-                                                    <a href="{{ .Permalink }}"><img class="img-fluid" src="{{ .Params.image | relURL }}" alt="{{ .Title }}"></a>
-                                                </div>
-                                            </div>
-                                            <div class="entry-content">
-                                                <h2 class="entry-title"><a href="{{ .Permalink }}">{{ .Title | truncate 60 }}</a></h2>
-                                            </div>
-                                        </div>
-                                        {{ end }}
-                                    </div>
-                                    <div class="gallery-slider-nav"> <!-- JS会初始化这个作为导航 -->
-                                        {{ range $galleryImages }}
-                                        <div class="thumb">
-                                            <img class="img-fluid" src="{{ .Params.image | relURL }}" alt="Nav thumb for {{ .Title }}">
-                                        </div>
-                                        {{ end }}
-                                    </div>
-                                </div>
+                        <div class="entry-content">
+                            <h3 class="entry-title"><a href="{{ $page.Permalink }}">{{ $page.Title }}</a></h3>
+                            <div class="entry-meta mb-2">
+                                <ul class="global-list">
+                                    <li><i class="far fa-clock"></i><a href="#"> {{ $page.Date.Format ($.Site.Params.dateFormat | default "Jan 2, 2006") }}</a></li>
+                                    {{ with $page.Params.views }}<li><i class="far fa-eye"></i><a href="#">{{ . }}</a></li>{{ end }}
+                                    {{ with $page.Params.comments_count }}<li><i class="far fa-comment"></i><a href="#">{{ . }}</a></li>{{ end }}
+                                </ul>
                             </div>
+                            <p>{{ $page.Summary | plainify | truncate 80 }}</p>
                         </div>
-
-                        <!-- 中间广告位 -->
-                        {{ with .Site.Params.homepageContentAd2 }}
-                             {{ if .enable }}
-                            <div class="sa-ad">
-                                <div class="ad-content">
-                                    <a href="{{ .linkUrl | safeURL }}" target="_blank" rel="noopener noreferrer"><img class="img-fluid" src="{{ .imageUrl | relURL }}" alt="{{ .altText }}"></a>
-                                </div>
-                            </div>
-                             {{ end }}
-                        {{ end }}
-
-                        <!-- 健康新闻版块 (Health Section) -->
-                        {{ $healthSection := .Site.GetPage "taxonomy" "categories" "health" }}
-                        {{ if $healthSection }}
-                        <div class="sa-section section">
-                            <div class="section-content">
-                                <div class="section-title">
-                                    <h1>{{ $healthSection.Title | default "健康资讯" }}</h1>
-                                    <div class="see-all"><a href="{{ $healthSection.Permalink }}">查看全部</a></div>
-                                </div>
-                                {{ with first 1 $healthSection.Pages.ByDate.Reverse }}
-                                    {{ partial "post-card.html" . }} <!-- 使用通用的 medium-post-style-1 卡片 -->
-                                {{ end }}
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        {{ range first 3 (after 1 $healthSection.Pages.ByDate.Reverse) }}
-                                            {{ partial "partials/post-card-small-horizontal.html" . }}
-                                        {{ end }}
-                                    </div>
-                                    <div class="col-lg-6">
-                                        {{ range first 3 (after 4 $healthSection.Pages.ByDate.Reverse) }}
-                                            {{ partial "partials/post-card-small-horizontal.html" . }}
-                                        {{ end }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {{ end }}
-
-
-                        <!-- 生活方式版块 (Life Style Section) -->
-                        {{ $lifestyleSection := .Site.GetPage "taxonomy" "categories" "lifestyle" }}
-                        {{ if $lifestyleSection }}
-                        <div class="sa-section">
-                            <div class="section-content mt-3">
-                                <div class="section-title">
-                                    <h1>{{ $lifestyleSection.Title | default "生活方式" }}</h1>
-                                    <div class="see-all"><a href="{{ $lifestyleSection.Permalink }}">查看全部</a></div>
-                                </div>
-                                <div class="row">
-                                    {{ range first 2 $lifestyleSection.Pages.ByDate.Reverse }}
-                                    <div class="col-lg-6">
-                                        <div class="sa-post"> <!-- 大图带摘要 -->
-                                            {{ partial "partials/post-card-large-summary.html" . }}
-                                        </div>
-                                    </div>
-                                    {{ end }}
-                                </div>
-                                <div class="row mt-3">
-                                    {{ range first 3 (after 2 $lifestyleSection.Pages.ByDate.Reverse) }}
-                                    <div class="col-lg-4">
-                                        {{ partial "partials/post-card-medium-no-summary.html" . }} <!-- 中等大小无摘要 -->
-                                    </div>
-                                    {{ end }}
-                                </div>
-                            </div>
-                        </div>
-                        {{ end }}
-
-                        <!-- 商业新闻版块 (Business Section - 用 post-card.html 风格) -->
-                        {{ $businessSection := .Site.GetPage "taxonomy" "categories" "business" }}
-                        {{ if $businessSection }}
-                        <div class="sa-section">
-                             <div class="section-content mt-3">
-                                <div class="section-title">
-                                    <h1>{{ $businessSection.Title | default "商业新闻" }}</h1>
-                                    <div class="see-all"><a href="{{ $businessSection.Permalink }}">查看全部</a></div>
-                                </div>
-                                {{ range first 4 $businessSection.Pages.ByDate.Reverse }}
-                                    {{ partial "post-card.html" . }}
-                                {{ end }}
-                            </div>
-                        </div>
-                        {{ end }}
-
-                    </div><!-- /.theiaStickySidebar -->
+                    </div>
+                    {{ end }} {{/* 结束 range $sliderPosts */}}
                 </div>
-                <div class="col-md-5 col-lg-4 sa-sticky">
-                    <div class="sa-sidebar theiaStickySidebar">
-                        {{ partial "main-sidebar.html" . }}
+            </div>
+            <div class="col-lg-6">
+                {{ $smallSidePosts := first 4 (where (where .Site.RegularPages.ByDate.Reverse "Type" "posts") "Params.homepage_small_list" true) }}
+                {{ if not $smallSidePosts }}{{ $smallSidePosts = first 4 (after 6 .Site.RegularPages.ByDate.Reverse) }}{{ end }}
+                {{ range $smallSidePosts }}
+                {{ $page := . }} {{/* 将当前页面对象赋给 $page */}}
+                <div class="sa-post small-post post-style-1">
+{{ with $page.Params.image }}
+    {{ $imagePath := . }} {{/* Front Matter中的图片路径 */}}
+    {{ $imageResource := "" }}
+
+    {{/* 1. 尝试从 /assets 目录获取全局资源 */}}
+    {{ $imageResource = resources.Get $imagePath }}
+
+    {{/* 2. 如果在assets中找不到，并且是Page Bundle，则尝试从页面资源获取 */}}
+    {{ if not $imageResource }}
+        {{ with $page.Resources.GetMatch $imagePath }}
+            {{ $imageResource = . }}
+        {{ end }}
+    {{ end }}
+
+    <div class="entry-header">
+        <div class="entry-thumbnail">
+            <a href="{{ $page.Permalink }}">
+                {{ if $imageResource }}
+                    {{/* 裁剪图片为 240x160 */}}
+                    {{ $croppedImage := $imageResource.Fill "240x160" }}
+                    <img class="img-fluid"
+                         src="{{ $croppedImage.RelPermalink }}"
+                         width="{{ $croppedImage.Width }}"
+                         height="{{ $croppedImage.Height }}"
+                         alt="{{ $page.Title }}">
+                {{ else }}
+                    {{/* 图片资源无法找到或无效，显示明确尺寸的占位符 */}}
+                    <div style="width: 240px; height: 160px; background: #eee; display: flex; align-items: center; justify-content: center; text-align: center; margin: auto;">
+                        No preview image
+                    </div>
+                {{ end }}
+            </a>
+        </div>
+    </div>
+{{ else }}
+    {{/* Front Matter中没有定义 image 参数，显示占位符 */}}
+    <div class="entry-header">
+        <div class="entry-thumbnail">
+            <a href="{{ $page.Permalink }}">
+                {{/* 原始占位符尺寸是 height:100px，这里改为 160px 高度以匹配裁剪尺寸 */}}
+                <div style="width: 100%; height: 160px; background: #eee; display: flex; align-items: center; justify-content: center; text-align: center;">
+                    No preview image
+                </div>
+            </a>
+        </div>
+    </div>
+{{ end }}
+                    <div class="entry-content">
+                        <h3 class="entry-title"><a href="{{ $page.Permalink }}">{{ $page.Title | truncate 50 }}</a></h3>
+                        <div class="entry-meta">
+                            <ul class="global-list">
+                                <li><i class="far fa-clock"></i><a href="#"> {{ $page.Date.Format ($.Site.Params.dateFormat | default "Jan 2, 2006") }}</a></li>
+                                {{ with $page.Params.views }}<li><i class="far fa-eye"></i><a href="#">{{ . }}</a></li>{{ end }}
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div><!-- /.row -->
-        </div><!-- /.container -->
-    </div><!-- /.sa-main-content -->
+                {{ end }} {{/* 结束 range $smallSidePosts */}}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Section 3: Three Posts in a Row (Image, Popup Video, or Placeholder) -->
+<div class="sa-section section">
+    <div class="section-content">
+        <div class="section-title">
+             {{/* 可以根据内容动态设置标题，或者保持静态 */}}
+             <h3>Special content</h3>
+        </div>
+        <div class="row">
+            {{/* 查询逻辑：获取标记为在此区域显示的文章，或者最新的几篇 */}}
+            {{ $section3Posts := first 3 (where (where .Site.RegularPages.ByDate.Reverse "Type" "posts") "Params.show_in_section3" true) }}
+            {{ if not $section3Posts }}{{ $section3Posts = first 3 (after 10 .Site.RegularPages.ByDate.Reverse) }}{{ end }} {{/* Fallback */}}
 
+            {{ range $section3Posts }}
+            <div class="col-lg-4">
+                {{/* layouts/partials/post-card-image-popup.html */}}
+                {{ $page := . }} {{/* 定义页面变量 */}}
+                <div class="sa-post mid-post">
+                    <div class="entry-header">
+<div class="entry-thumbnail">
+    {{ with $page.Params.image }} {{/* 检查是否有基础图片 */}}
+        {{ $imagePathInFrontMatter := . }} {{/* 获取 Front Matter 中的图片路径字符串 */}}
+        {{ $imageResource := "" }}
+
+        {{/* 1. 尝试从 /assets 目录获取全局资源 */}}
+        {{ $imageResource = resources.Get $imagePathInFrontMatter }}
+
+        {{/* 2. 如果在assets中找不到，并且是Page Bundle，则尝试从页面资源获取 */}}
+        {{ if not $imageResource }}
+            {{ with $page.Resources.GetMatch $imagePathInFrontMatter }}
+                {{ $imageResource = . }}
+            {{ end }}
+        {{ end }}
+
+        {{ if $imageResource }}
+            {{/* 图片资源找到了，现在进行裁剪 */}}
+            {{ $croppedImage := $imageResource.Fill "460x350" }} {{/* 裁剪为 460x350 */}}
+
+            {{ with $page.Params.video_popup_url }} {{/* 再检查是否有弹窗视频链接 */}}
+                <div class="video-icon">
+                    <a class="sa-popup" href="{{ . }}"><i class="fa fa-play" aria-hidden="true"></i></a> {{/* fa-play or fas fa-play */}}
+                </div>
+                {{/* 图片链接到视频弹窗，显示裁剪后的图片 */}}
+                <a href="{{ . }}" class="sa-popup">
+                    <img class="img-fluid"
+                         src="{{ $croppedImage.RelPermalink }}"
+                         width="{{ $croppedImage.Width }}"
+                         height="{{ $croppedImage.Height }}"
+                         alt="{{ $page.Title }}">
+                </a>
+            {{ else }}
+                {{/* 没有视频弹窗链接，图片链接到文章详情，显示裁剪后的图片 */}}
+                <a href="{{ $page.Permalink }}">
+                    <img class="img-fluid"
+                         src="{{ $croppedImage.RelPermalink }}"
+                         width="{{ $croppedImage.Width }}"
+                         height="{{ $croppedImage.Height }}"
+                         alt="{{ $page.Title }}">
+                </a>
+            {{ end }}
+        {{ else }}
+            {{/* 图片资源 ($imageResource) 未找到，显示占位符并链接到文章详情 */}}
+            <a href="{{ $page.Permalink }}">
+                <div style="width: 460px; height: 350px; background: #eee; display: flex; align-items: center; justify-content: center; font-size: 0.9em; color: #777; text-align: center; margin:auto;">
+                    No preview image
+                </div>
+            </a>
+        {{ end }}
+    {{ else }}
+        {{/* Front Matter 中没有定义 image 参数，显示占位符并链接到文章详情 */}}
+        <a href="{{ $page.Permalink }}">
+            <div style="width: 100%; height: 350px; background: #eee; display: flex; align-items: center; justify-content: center; font-size: 0.9em; color: #777; text-align: center;">
+                No preview image
+            </div>
+        </a>
+    {{ end }}
+</div>
+                    </div>
+                    <div class="entry-content">
+                        {{ with $page.Params.categories }}
+                        <div class="category mb-1"> {{/* 可以在这里加分类 */}}
+                            <ul class="global-list">
+                                <li><a href="{{ "/categories/" | relURL }}{{ index . 0 | urlize }}">{{ index . 0 }}</a></li>
+                            </ul>
+                        </div>
+                        {{ end }}
+                        <h3 class="entry-title">
+                            <a href="{{ $page.Permalink }}">{{ $page.Title | truncate 60 }}</a>
+                        </h3>
+                        <div class="entry-meta">
+                            <ul class="global-list">
+                                <li><i class="far fa-clock"></i><a href="#"> {{ $page.Date.Format ($.Site.Params.dateFormat | default "Jan 2, 2006") }}</a></li>
+                                {{ with $page.Params.views }}<li><i class="far fa-eye"></i><a href="#">{{ . }}</a></li>{{ end }}
+                                {{ with $page.Params.likes }}<li><i class="far fa-heart"></i><a href="#">{{ . }}</a></li>{{ end }}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                        </div>
+            {{ end }}
+        </div>
+    </div>
+</div>
+
+                    {{ partial "foot-ad.html" . }}
+
+<!-- Section 5: Large Post (left) & Two Small Posts (right) (来自原始HTML) -->
+<div class="sa-section section">
+    <div class="section-content">
+        <div class="row">
+            <div class="col-lg-9">
+                {{ $largePostQuery := first 1 (where (where .Site.RegularPages.ByDate.Reverse "Type" "posts") "Params.homepage_large_feature" true) }}
+                {{ if not $largePostQuery }}{{ $largePostQuery = first 1 (after 13 .Site.RegularPages.ByDate.Reverse) }}{{ end }}
+
+                {{ range $largePostQuery }}
+                {{ $page := . }} {{/* 将当前页面对象赋给 $page */}}
+                <div class="sa-post">
+                    <div class="entry-header">
+{{ with $page.Params.image }} {{/* 检查 Front Matter 中是否有 image 参数 */}}
+    {{ $imagePath := . }} {{/* 获取 Front Matter 中的图片路径字符串 */}}
+    {{ $imageResource := "" }}
+
+    {{/* 1. 尝试从 /assets 目录获取全局资源 */}}
+    {{ $imageResource = resources.Get $imagePath }}
+
+    {{/* 2. 如果在assets中找不到，并且是Page Bundle，则尝试从页面资源获取 */}}
+    {{ if not $imageResource }}
+        {{ with $page.Resources.GetMatch $imagePath }}
+            {{ $imageResource = . }}
+        {{ end }}
+    {{ end }}
+
+    <div class="entry-thumbnail">
+        <a href="{{ $page.Permalink }}"> {{/* 链接始终指向文章详情页 */}}
+            {{ if $imageResource }}
+                {{/* 图片资源找到了，现在进行裁剪 */}}
+                {{ $croppedImage := $imageResource.Fill "795x460" }} {{/* 裁剪为 650x380 */}}
+                <img class="img-fluid"
+                     src="{{ $croppedImage.RelPermalink }}"
+                     width="{{ $croppedImage.Width }}"
+                     height="{{ $croppedImage.Height }}"
+                     alt="{{ $page.Title }}">
+            {{ else }}
+                {{/* 图片资源 ($imageResource) 未找到，显示明确尺寸的占位符 */}}
+                <div style="width: 650px; height: 380px; background: #eee; display: flex; align-items: center; justify-content: center; text-align: center; margin: auto;">
+                    No preview image
+                </div>
+            {{ end }}
+        </a>
+    </div>
+{{ else }}
+    {{/* Front Matter中没有定义 image 参数，显示占位符 */}}
+    <div class="entry-thumbnail">
+        <a href="{{ $page.Permalink }}"> {{/* 链接始终指向文章详情页 */}}
+            {{/* 原始占位符尺寸是 height:250px，这里改为 380px 高度以匹配裁剪尺寸 */}}
+            <div style="width: 100%; height: 380px; background: #eee; display: flex; align-items: center; justify-content: center; text-align: center;">
+                No preview image
+            </div>
+        </a>
+    </div>
+{{ end }} {{/* 结束 with $page.Params.image */}}
+                    </div>
+                    <div class="entry-content">
+                        <h3 class="entry-title"><a href="{{ $page.Permalink }}">{{ $page.Title }}</a></h3>
+                        <div class="entry-meta mb-2">
+                            <ul class="global-list">
+                                <li><i class="far fa-clock"></i><a href="#"> {{ $page.Date.Format ($.Site.Params.dateFormat | default "Jan 2, 2006") }}</a></li>
+                                {{ with $page.Params.views }}<li><i class="far fa-eye"></i><a href="#">{{ . }}</a></li>{{ end }}
+                                {{ with $page.Params.comments_count }}<li><i class="far fa-comment"></i><a href="#">{{ . }}</a></li>{{ end }}
+                            </ul>
+                        </div>
+                        <p>{{ $page.Summary | plainify | truncate 80 }}</p>
+                    </div>
+                </div>
+                {{ end }} {{/* 结束 range $largePostQuery */}}
+            </div>
+
+            <div class="col-lg-3">
+                {{ $twoSmallPostsQuery := first 2 (where (where .Site.RegularPages.ByDate.Reverse "Type" "posts") "Params.homepage_aside_small" true) }}
+                {{ if not $twoSmallPostsQuery }}{{ $twoSmallPostsQuery = first 2 (after 14 .Site.RegularPages.ByDate.Reverse) }}{{ end }}
+
+                {{ range $twoSmallPostsQuery }}
+                {{ $page := . }} {{/* 将当前页面对象赋给 $page */}}
+                <div class="sa-post small-post">
+{{ with $page.Params.image }} {{/* 检查 Front Matter 中是否有 image 参数 */}}
+    {{ $imagePath := . }} {{/* 获取 Front Matter 中的图片路径字符串 */}}
+    {{ $imageResource := "" }}
+
+    {{/* 1. 尝试从 /assets 目录获取全局资源 */}}
+    {{ $imageResource = resources.Get $imagePath }}
+
+    {{/* 2. 如果在assets中找不到，并且是Page Bundle，则尝试从页面资源获取 */}}
+    {{ if not $imageResource }}
+        {{ with $page.Resources.GetMatch $imagePath }}
+            {{ $imageResource = . }}
+        {{ end }}
+    {{ end }}
+
+    <div class="entry-header">
+        <div class="entry-thumbnail">
+            <a href="{{ $page.Permalink }}"> {{/* 链接始终指向文章详情页 */}}
+                {{ if $imageResource }}
+                    {{/* 图片资源找到了，现在进行裁剪 */}}
+                    {{ $croppedImage := $imageResource.Fill "460x350" }} {{/* 裁剪为 460x350 */}}
+                    <img class="img-fluid"
+                         src="{{ $croppedImage.RelPermalink }}"
+                         width="{{ $croppedImage.Width }}"
+                         height="{{ $croppedImage.Height }}"
+                         alt="{{ $page.Title }}">
+                {{ else }}
+                    {{/* 图片资源 ($imageResource) 未找到，显示明确尺寸的占位符 */}}
+                    <div style="width: 245px; height: 185px; background: #eee; display: flex; align-items: center; justify-content: center; text-align: center; margin: auto;">
+                        No preview image
+                    </div>
+                {{ end }}
+            </a>
+        </div>
+    </div>
+{{ else }}
+    {{/* Front Matter中没有定义 image 参数，显示占位符 */}}
+    <div class="entry-header">
+        <div class="entry-thumbnail">
+            <a href="{{ $page.Permalink }}"> {{/* 链接始终指向文章详情页 */}}
+                {{/* 原始占位符尺寸是 height:100px，这里改为 350px 高度以匹配裁剪尺寸 */}}
+                <div style="width: 100%; height: 185px; background: #eee; display: flex; align-items: center; justify-content: center; text-align: center;">
+                    No preview image
+                </div>
+            </a>
+        </div>
+    </div>
+{{ end }} {{/* 结束 with $page.Params.image */}}
+                    <div class="entry-content">
+                        <h3 class="entry-title"><a href="{{ $page.Permalink }}">{{ $page.Title | truncate 40 }}</a></h3>
+                        <div class="entry-meta">
+                            <ul class="global-list">
+                                <li><i class="far fa-clock"></i><a href="#"> {{ $page.Date.Format ($.Site.Params.dateFormat | default "Jan 2, 2006") }}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                {{ end }} {{/* 结束 range $twoSmallPostsQuery */}}
+            </div>
+        </div> <!-- /.row for large post & two small -->
+
+        <!-- Section 6: Three "Video Icon" Posts in a Row (来自原始HTML) -->
+        <div class="row mt-4">
+            {{ $videoIconPostsQuery := first 3 (where (where .Site.RegularPages "Params.image" "!=" nil) "Params.video_popup_url" "!=" nil ) }}
+            {{ if not $videoIconPostsQuery }}{{ $videoIconPostsQuery = first 3 (after 16 .Site.RegularPages.ByDate.Reverse) }}{{ end }}
+
+            {{ range $videoIconPostsQuery }}
+            {{ $page := . }} {{/* 将当前页面对象赋给 $page */}}
+            <div class="col-lg-4">
+                <div class="sa-post mid-post">
+                    <div class="entry-header">
+<div class="entry-thumbnail">
+    {{ $videoPopupUrl := $page.Params.video_popup_url }} {{/* 获取视频弹窗链接 */}}
+    {{ $imagePathInFrontMatter := $page.Params.image }}  {{/* 获取 Front Matter 中的图片路径字符串 */}}
+    {{ $imageResource := "" }}
+    {{ $finalImageUrl := "" }} {{/* 初始化最终用于 src 的图片 URL */}}
+    {{ $finalImageWidth := "460" }} {{/* 默认裁剪宽度 */}}
+    {{ $finalImageHeight := "350" }} {{/* 默认裁剪高度 */}}
+
+
+    {{ if $imagePathInFrontMatter }}
+        {{/* 1. 尝试从 /assets 目录获取全局资源 */}}
+        {{ $imageResource = resources.Get $imagePathInFrontMatter }}
+
+        {{/* 2. 如果在assets中找不到，并且是Page Bundle，则尝试从页面资源获取 */}}
+        {{ if not $imageResource }}
+            {{ with $page.Resources.GetMatch $imagePathInFrontMatter }}
+                {{ $imageResource = . }}
+            {{ end }}
+        {{ end }}
+
+        {{ if $imageResource }}
+            {{/* 图片资源找到了，进行裁剪 */}}
+            {{ $croppedImage := $imageResource.Fill (printf "%sx%s" $finalImageWidth $finalImageHeight) }}
+            {{ $finalImageUrl = $croppedImage.RelPermalink }}
+            {{/* $finalImageWidth 和 $finalImageHeight 已经设定为裁剪后的尺寸 */}}
+        {{ else }}
+            {{/* 图片资源未找到，但 Front Matter 中有 image 路径，可能是外部 URL 或路径错误 */}}
+            {{/* 在这种情况下，我们不能裁剪，直接使用原始路径，并希望浏览器能加载 */}}
+            {{/* 或者你也可以选择在这里强制显示一个“资源未找到”的占位符 */}}
+            {{ $finalImageUrl = $imagePathInFrontMatter | relURL }}
+            {{/* 对于外部URL或无法处理的本地图片，我们无法预知其尺寸，可以不设置width/height或用CSS控制 */}}
+            {{ $finalImageWidth = "" }} {{/* 清空，让浏览器或CSS决定 */}}
+            {{ $finalImageHeight = "" }}
+        {{ end }}
+    {{ end }}
+
+
+    {{ with $videoPopupUrl }}
+    <div class="video-icon">
+        <a class="sa-popup" href="{{ . }}"><i class="fa fa-play" aria-hidden="true"></i></a>
+    </div>
+    {{ end }}
+
+    <a href="{{ $videoPopupUrl | default $page.Permalink }}" {{ if $videoPopupUrl }}class="sa-popup"{{ end }}>
+        {{ if $finalImageUrl }}
+            <img class="img-fluid"
+                 src="{{ $finalImageUrl }}"
+                 {{ if $finalImageWidth }}width="{{ $finalImageWidth }}"{{ end }}
+                 {{ if $finalImageHeight }}height="{{ $finalImageHeight }}"{{ end }}
+                 alt="{{ $page.Title }}">
+        {{ else }}
+            {{/* 如果连 $imagePathInFrontMatter 都没有，或者处理后 $finalImageUrl 仍然为空 */}}
+            <div style="width: {{ $finalImageWidth | default "100%" }}; height: {{ $finalImageHeight | default "auto" }}; min-height: 200px; background: #eee; display: flex; align-items: center; justify-content: center; text-align: center; margin: auto;">
+                No preview image
+            </div>
+        {{ end }}
+    </a>
+</div>
+                    </div>
+                    <div class="entry-content">
+                        <h3 class="entry-title"><a href="{{ $page.Permalink }}">{{ $page.Title | truncate 50 }}</a></h3>
+                        <div class="entry-meta">
+                            <ul class="global-list">
+                                <li><i class="far fa-clock"></i><a href="#"> {{ $page.Date.Format ($.Site.Params.dateFormat | default "Jan 2, 2006") }}</a></li>
+                                {{ with $page.Params.views }}<li><i class="far fa-eye"></i><a href="#">{{ . }}</a></li>{{ end }}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{ end }} {{/* 结束 range $videoIconPostsQuery */}}
+        </div>
+    </div><!-- /.section-content -->
+</div><!-- /.sa-section -->
+                    <!-- Section 7: Medium Post Style List (来自原始HTML) -->
+                    <div class="sa-section">
+                        <div class="section-content mt-3">
+                            {{ $mediumListPosts := first 4 (after 19 .Site.RegularPages.ByDate.Reverse) }} <!-- Adjust 'after' based on posts already shown -->
+                            {{ range $mediumListPosts }}
+                                {{ partial "post-card.html" . }} <!-- Reusing the post-card partial -->
+                            {{ end }}
+                        </div>
+                    </div>
+
+                    <!-- Pagination (通常首页不直接放完整分页，但如果需要可以保留) -->
+
+                    <div class="sg-pagination text-center mb-3">
+                        <a href="{{ "/shopping/" | relURL }}" class="btn btn-primary">View all articles <i class="fas fa-arrow-right"></i></a>
+                    </div>
+
+                </div><!-- /.theiaStickySidebar -->
+            </div>
+            <div class="col-md-5 col-lg-4 sa-sticky">
+                <div class="sa-sidebar theiaStickySidebar">
+                    {{ partial "main-sidebar.html" . }}
+                </div>
+            </div>
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+</div><!-- /.sa-main-content -->
 {{ end }}
