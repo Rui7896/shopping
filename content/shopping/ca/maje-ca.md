@@ -1,14 +1,14 @@
 ---
-title: "Spring and Summer Sale at the Canadian Maje Official Website! Up to 50% Off! These Fashionable Items Are a Great Bargain!"
-date: 2025-06-09
+title: "The spring and summer sale on the Canadian Maje official website offers up to 50% off. Hurry up and grab the deals!"
+date: 2025-06-11
 image: "images/posts/ca/maje-ca.jpg" # Path relative to static or assets
-image_link: ""
+image_link: "https://sovrn.co/byhhqac"
 author: "shopping.nav8.top" # Or from site params
 categories: ['Fashion clothing']
 tags: ['Clothing', 'Footwear', 'Handbags', 'Fashion items', 'Online store services', 'Accessories', 'Fashion apparel']
-views: "2889k"
-likes: "5444"
-comments_count: "7448" # This would usually be dynamic from comment system
+views: "641k"
+likes: "6917"
+comments_count: "4802" # This would usually be dynamic from comment system
 summary: "Hey guys, the Canada Maje official website has launched a spring-summer promotion. Fashionistas, don't miss it! This brand designs and sells fashionable clothing and accessories, and there is a wide range of products participating in the event. Many popular items are heavily discounted. For example, the embroidered ruffled maxi dress is 50% off. However, there are some glitches on the official website, and only partial product discounts are displayed. There are more surprises on the official website. Hurry up to choose your spring and summer outfits!"
 breaking_news: true   
 homepage_slider_v2: false  
@@ -21,7 +21,7 @@ homepage_large_feature: false
 # ![Image Alt Text](/images/post/8.jpg)
 # ![Image Alt Text](/images/post/9.jpg)
 ---
-
+[https://ca.maje.com](https://sovrn.co/byhhqac)
 Guys! I just discovered the spring-summer promotion on the Canadian Maje official website today. Fashionistas, don't miss this great opportunity to get some amazing deals!
 
 Maje is a well - known brand in the fashion circle. It specializes in designing and selling all kinds of fashionable clothing and accessories, and has a large number of fans. The official website is now having a promotion on Spring - Summer styles, with discounts of up to 50% off. Isn't it super tempting?

@@ -1,14 +1,14 @@
 ---
-title: "Unveiling the Treasure Coins on the 2025 Royal Canadian Mint Official Website! A Must-have for Investment and Collection!"
-date: 2025-06-09
+title: "2025: Uncover the Treasure Coins and Sets on the Royal Canadian Mint's Official Website"
+date: 2025-06-11
 image: "images/posts/ca/mint-ca.jpg" # Path relative to static or assets
-image_link: ""
+image_link: "https://sovrn.co/girqjof"
 author: "shopping.nav8.top" # Or from site params
 categories: ['Coin products']
 tags: ['Precious metal coins', 'Commemorative coins', 'Investment coins', 'Coin sets', 'Free return service', 'Free delivery service', 'Online store platform', 'Blogs and information services']
-views: "2889k"
-likes: "5444"
-comments_count: "7448" # This would usually be dynamic from comment system
+views: "641k"
+likes: "6917"
+comments_count: "4802" # This would usually be dynamic from comment system
 summary: "This article introduces the official website of the Royal Canadian Mint. In 2025, the newly issued coins and sets are rich, featuring themes such as natural animals, cultural abstractions, and special shapes, each with its own highlights. The mint will hold an online public meeting. The official website offers considerate services, and its investment coins have significant advantages. The blog provides collection guides, etc., making it suitable for enthusiasts, investors, and consumers."
 breaking_news: true   
 homepage_slider_v2: false  
@@ -21,7 +21,7 @@ homepage_large_feature: false
 # ![Image Alt Text](/images/post/8.jpg)
 # ![Image Alt Text](/images/post/9.jpg)
 ---
-
+[https://www.mint.ca](https://sovrn.co/girqjof)
 Hey, all coin collectors and investors! Today, let's talk about some interesting things on the official website of the Royal Canadian Mint.
 
 First, let's talk about the new coins and sets issued by them in 2025. They are truly diverse and dazzling!

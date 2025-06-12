@@ -1,14 +1,14 @@
 ---
-title: "It's the last day of Father's Day! Up to 70% off on The Last Hunt outdoor supplies, hurry to stock up!"
-date: 2025-06-09
+title: "Father's Day! Great promotion on outdoor supplies from The Last Hunt. Multiple brands up to 70% off. Stock up now!"
+date: 2025-06-11
 image: "images/posts/ca/the-last-hunt.jpg" # Path relative to static or assets
-image_link: ""
+image_link: "https://sovrn.co/cje1bs9"
 author: "shopping.nav8.top" # Or from site params
 categories: ['Outdoor supplies']
 tags: ['Online store service', 'Outdoor supplies', "Men's clothing", "Women's clothing", "Children's products", 'Running shoes', 'Hiking shoes', 'Folding chairs', 'Road running shoes', "Men's hats", "Men's footwear", "Women's rain gear", "Children's equipment", 'Camping equipment', 'Sports apparel', 'Rain gear']
-views: "2889k"
-likes: "5444"
-comments_count: "7448" # This would usually be dynamic from comment system
+views: "641k"
+likes: "6917"
+comments_count: "4802" # This would usually be dynamic from comment system
 summary: "The outdoor products discount website The Last Hunt is having a Father's Day promotion, which ends on June 8th. There is a maximum of 65% off the whole store, and an additional 20% discount on the men's series. The products are diverse, with powerful functions and unique designs. Several popular products are recommended, and at the same time, matters needing attention such as using the promo code are reminded. Don't miss this great opportunity to stock up."
 breaking_news: true   
 homepage_slider_v2: false  
@@ -21,7 +21,7 @@ homepage_large_feature: false
 # ![Image Alt Text](/images/post/8.jpg)
 # ![Image Alt Text](/images/post/9.jpg)
 ---
-
+[https://www.thelasthunt.com](https://sovrn.co/cje1bs9)
 Hey, friends who love the outdoors! Today, I'm going to introduce you to an amazing outdoor gear discount website - The Last Hunt. It's having a Father's Day promotion right now. This is a great time to stock up. It would be a real pity to miss it!
 
 This promotional event is incredibly cost - effective. Items in the men's collection can enjoy an additional 20% discount, but you need to use the promo code “FATHER20”. Note that some items are not eligible for this offer, so double - check when you're checking out. The site - wide discounts are also quite impressive, with a maximum of 65% off. The Canadian brand section even offers up to 70% off! Moreover, the event ends on June 8th, and it's already June 7th. Time is running out, so hurry up!

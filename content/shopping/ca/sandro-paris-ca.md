@@ -1,27 +1,27 @@
 ---
-title: "SANDRO Canada official website's 2025 spring-summer collection promotion, up to 50% off on all categories! Don't miss out on the fashion bargains."
-date: 2025-06-09
+title: "SANDRO Canada official website offers up to 50% off on all categories in the 2025 spring-summer collection."
+date: 2025-06-11
 image: "images/posts/ca/sandro-paris-ca.jpg" # Path relative to static or assets
-image_link: ""
+image_link: "https://sovrn.co/4206r1l"
 author: "shopping.nav8.top" # Or from site params
 categories: ['Fashion clothing', 'Fashion Jewelry and Accessories']
 tags: ['Clothing', "Women's clothing", "Men's clothing", 'Accessories', 'Dresses', 'Jackets', 'Pants', 'Handbags', 'Footwear', 'Online store services', 'Store query service', 'Promotion Information Services', 'Jewelry', 'Tops', 'Brand gift card']
-views: "4273k"
-likes: "3374"
-comments_count: "736" # This would usually be dynamic from comment system
+views: "641k"
+likes: "6917"
+comments_count: "4802" # This would usually be dynamic from comment system
 summary: "In 2025, the spring-summer series promotion event on the SANDRO Canada official website (https://ca.sandro - paris.com) is worth paying attention to. This brand features a French luxury style, with up to 50% off on all product categories. The website has clear product categories and a simple design with a touch of luxury. Although there are minor issues with garbled characters, the overall information is clear, making it suitable for consumers who pursue French fashion and cost - effectiveness. "
 breaking_news: true   
 homepage_slider_v2: false  
 homepage_latest_news: true  
 gallery_image: true  
-show_in_section3: true
+show_in_section3: false
 homepage_large_feature: false
 # These should be part of your Markdown content below, e.g.:
 # ![Image Alt Text](/images/post/7.jpg)
 # ![Image Alt Text](/images/post/8.jpg)
 # ![Image Alt Text](/images/post/9.jpg)
 ---
-
+[https://ca.sandro-paris.com](https://sovrn.co/4206r1l)
 Today, I'm going to introduce the relevant situation of the promotional activities for the Spring/Summer 2025 collection on the SANDRO Canada official website (https://ca.sandro-paris.com).
 
 SANDRO is a French轻奢 fashion brand that features a simple and elegant French style. It's like an elegant French gentleman or lady, attracting fashionable urban men and women. When you enter the official website page, "Spring/Summer Collection 2025" is clearly written at the top, indicating that the new products of the 2025 spring/summer collection are currently being promoted.

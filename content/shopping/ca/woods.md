@@ -2,13 +2,13 @@
 title: "Explore the Treasures of the World's Largest Softwood Exporter's Timber on the Website of the Canadian Wood Council"
 date: 2025-06-11
 image: "images/posts/ca/woods.jpg" # Path relative to static or assets
-image_link: ""
+image_link: "https://sovrn.co/d8my6hz"
 author: "shopping.nav8.top" # Or from site params
 categories: ['Brand official website']
 tags: ['Canadian timber', 'Softwood', 'Hardwood', 'Timber technical standards', 'Timber design guide', 'Timber construction manual', 'Interpretation of sustainability certification', 'Industry report', 'Innovative technology', 'Sustainable solutions', 'Tariff inquiry', 'Trade regulations', 'Logistics guide', 'Industry dynamic information']
-views: "8612k"
-likes: "4490"
-comments_count: "5585" # This would usually be dynamic from comment system
+views: "641k"
+likes: "6917"
+comments_count: "4802" # This would usually be dynamic from comment system
 summary: "The official website of the Canadian Wood Council is an important window to understand Canadian wood. The website introduces the situation of the association, showcases wood products and their applications, etc. It has multiple sections to serve professionals and enterprises. It is characterized by authority, a sustainable orientation, and high practicality. The target audience is extensive, and it promotes the internationalization and sustainable development of the Canadian wood industry."
 breaking_news: true   
 homepage_slider_v2: false  
@@ -21,7 +21,7 @@ homepage_large_feature: false
 # ![Image Alt Text](/images/post/8.jpg)
 # ![Image Alt Text](/images/post/9.jpg)
 ---
-
+[https://www.woodscanada.com](https://sovrn.co/d8my6hz)
 ### The Official Website of the Canadian Wood Council: A Wonderful Window to the World of Canadian Wood
 
 Hey, do you know? In today's diverse market, Canadian wood has a unique charm. And the official website of the Canadian Wood Council is like a mysterious treasure trove that allows you to comprehensively understand Canadian wood.

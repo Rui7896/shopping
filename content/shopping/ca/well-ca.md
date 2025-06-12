@@ -1,27 +1,27 @@
 ---
-title: "Countdown to the big promotion on Well.ca! This Canadian treasure shopping platform offers various good products with discounts of up to 20% off. Hurry up to grab the deals!"
-date: 2025-06-09
+title: "Well.ca, a treasure shopping platform in Canada, offers a summer promotion with many products discounted up to 20% off."
+date: 2025-06-11
 image: "images/posts/ca/well-ca.jpg" # Path relative to static or assets
-image_link: ""
+image_link: "https://sovrn.co/1ctpt2f"
 author: "shopping.nav8.top" # Or from site params
 categories: ['Online shopping']
 tags: ['Online store services', 'Free delivery service', 'Health and wellness products', 'Beauty products', 'Personal care products', 'Maternity and baby products', 'Food and beverages', 'Sunscreen', 'Summer beauty gift set', 'Sun protection set', 'Special water bottle', 'Non-alcoholic beer', 'Promotion Information Services', 'Localized services']
-views: "2889k"
-likes: "5444"
-comments_count: "7448" # This would usually be dynamic from comment system
+views: "641k"
+likes: "6917"
+comments_count: "4802" # This would usually be dynamic from comment system
 summary: "Well.ca is a hidden gem platform for health and beauty shopping in Canada. It offers free delivery within Canada for orders over CAD 35. As of June 8, 2025, there are a wide range of promotional activities, with discounts available for both brands and product categories. The products are classified in great detail, and each category has its own distinct features. It provides a great user experience, emphasizes localization and sustainability, and is definitely worth shopping at for stockpiling."
 breaking_news: true   
 homepage_slider_v2: false  
 homepage_latest_news: true  
 gallery_image: true  
-show_in_section3: true
-homepage_large_feature: true
+show_in_section3: false
+homepage_large_feature: false
 # These should be part of your Markdown content below, e.g.:
 # ![Image Alt Text](/images/post/7.jpg)
 # ![Image Alt Text](/images/post/8.jpg)
 # ![Image Alt Text](/images/post/9.jpg)
 ---
-
+[https://well.ca](https://sovrn.co/1ctpt2f)
 # Well.ca: A Treasure Trove for Health and Beauty Shopping in Canada
 
 Hey, do you know that there's an amazing online shopping platform in Canada called Well.ca? It's an online paradise for health, beauty, and skincare products, specializing in natural and sustainable goods. Moreover, you can enjoy free shipping within Canada when your order reaches $35 CAD. This perk is just so thoughtful!

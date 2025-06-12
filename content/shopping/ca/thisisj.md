@@ -1,14 +1,14 @@
 ---
-title: "Treasure pajama brand This Is J, the choice for comfortable and stylish sleep for the whole family!"
-date: 2025-06-09
+title: "Canadian treasure pajama brand This Is J is suitable for the whole family. Comfortable and stylish, it's not to be missed."
+date: 2025-06-11
 image: "images/posts/ca/thisisj.jpg" # Path relative to static or assets
-image_link: ""
+image_link: "https://sovrn.co/ppho6rj"
 author: "shopping.nav8.top" # Or from site params
 categories: ['Fashion clothing']
 tags: ['Clothing', 'Silk pajamas', 'Fashion items', 'Cara Cara Fashion Brand', 'Cara Cara Clothing', 'Cara Cara Fashion Items', 'Pet clothing', 'Member plan', 'Referral reward service', 'Influencer cooperation services', 'Online store service', 'Homewear']
-views: "4597k"
-likes: "8931"
-comments_count: "7807" # This would usually be dynamic from comment system
+views: "641k"
+likes: "6917"
+comments_count: "4802" # This would usually be dynamic from comment system
 summary: "This Is J is a hidden gem in the pajama industry hailing from Canada, boasting a rich history of over 20 years. Its official website features a simple design with a strong focus on user experience. The brand's product line encompasses pajamas and loungewear for women, men, and children. These items are crafted from high - quality materials and showcase fashionable designs, adorned with a variety of unique patterns. Additionally, This Is J runs promotional activities and content marketing campaigns. It precisely targets the mid - to high - end sleepwear market, making it a worthy choice for those who pursue quality sleep. "
 breaking_news: true   
 homepage_slider_v2: false  
@@ -21,7 +21,7 @@ homepage_large_feature: false
 # ![Image Alt Text](/images/post/8.jpg)
 # ![Image Alt Text](/images/post/9.jpg)
 ---
-
+[https://thisisj.com](https://sovrn.co/ppho6rj)
 Guys, today I'm going to introduce you to a hidden gem of a pajama brand from Canada called This Is J. The overall style of its official website homepage is so cozy and trendy. It mainly targets family users who value sleep quality and the quality of life, offering pajamas and loungewear for women, men, and children. This is truly a blessing for the whole family to have sweet dreams together!
 
 ### Brand Positioning and Core Selling Points
