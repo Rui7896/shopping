@@ -345,8 +345,8 @@ title = "EasyBuy Global-Making Global Shopping Simple"
 [params]
   # ...
   mainSections = ["shopping", "docs"] # 只索引 posts 和 docs section 的内容
-  description = "易购全球是您的全球购物导航专家，汇聚全球数千个知名购物平台，涵盖时尚、美妆、母婴等丰富品类，提供实时更新、智能推荐、多语言支持等贴心服务，助您轻松开启全球好物探索之旅，畅享品质生活。"
-  keywords = ["易购全球", "全球购物导航", "海淘平台推荐", "全球好物", "易购全球导航", "全球购物指南", "海淘攻略", "国际购物平台", "全球商品推荐", "跨境购物助手"]
+  description = "EasyBuy Global is your expert guide to worldwide shopping, gathering thousands of well-known shopping platforms from around the globe. Covering a wide range of categories including fashion, beauty, maternity and baby products, and more, we provide real-time updates, intelligent recommendations, and multilingual support to help you easily explore quality products worldwide and enjoy a premium lifestyle."
+  keywords = ["EasyBuy Global","Global Shopping Navigation","Cross-border Shopping Platform Recommendations","Global Quality Products","EasyBuy Global Navigation","Global Shopping Guide","Cross-border Shopping Tips","International Shopping Platforms","Global Product Recommendations","Cross-border Shopping Assistant"]
   favicon = "images/icons/favicon.ico"
   dateFormat = "January 2nd, 2006"
   enablePWA = true
